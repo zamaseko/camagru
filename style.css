@@ -3,26 +3,36 @@ body
 	background-color: #d3d3d3
 }
 input {
-	padding: 5px;
+	padding: 10px;
 }
 .login-button
 {
 	padding: 10px;
+	margin: 5px;
+	width: 50px;
 	text-align: center;
 }
 
 .login-form{
-	margin: 160px auto;
+	margin: 140px 150px;
 	content: center;
 	width: 100px;
 	padding: 10px;
+	background-color: blue;
+	width: auto;
 
 }
+
 .in-row
 {
 	display: flex;
-	background: green;
+	background: yellow;
 	margin: 150px auto;
+}
+div img {
+	margin: auto;
+	background-color: green;
+	border: 10px;
 }
 .app-name
 {
