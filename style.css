@@ -2,9 +2,7 @@ body
 {
 	background-color: #d3d3d3
 }
-input {
-	padding: 10px;
-}
+
 .login-button
 {
 	padding: 10px;
@@ -27,7 +25,7 @@ input {
 {
 	display: flex;
 	background: orangered;
-	margin: 150px auto;
+	margin: auto;
 }
 div img {
 	margin: auto;
@@ -50,7 +48,9 @@ form{
 	margin: 140px 150px;
 	margin-block: 150px;
 }
-#box-in-a-box button
+form input
 {
-	
+	padding: 10px;
+	border-style: outset;
+	padding-block: inherit; 
 }
