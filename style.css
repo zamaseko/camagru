@@ -18,7 +18,7 @@ input {
 	content: center;
 	width: 100px;
 	padding: 10px;
-	background-color: blue;
+	background-color: greenyellow;
 	width: auto;
 
 }
@@ -26,7 +26,7 @@ input {
 .in-row
 {
 	display: flex;
-	background: yellow;
+	background: orangered;
 	margin: 150px auto;
 }
 div img {
@@ -42,9 +42,15 @@ div img {
 }
 .the-form
 {
-	background-color: blue;
+	background-color: blueviolet;
 }
 form{
-	background-color: blue;
-	background-position: center;
+	background-color: white;
+	text-align: center;
+	margin: 140px 150px;
+	margin-block: 150px;
+}
+#box-in-a-box button
+{
+	
 }
