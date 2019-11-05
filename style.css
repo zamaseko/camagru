@@ -1,6 +1,6 @@
 body
 {
-	background-color: #d3d3d3
+	background-color: lightsalmon;
 }
 
 .login-button
@@ -26,11 +26,6 @@ body
 	display: flex;
 	background: orangered;
 	margin: auto;
-}
-div img {
-	margin: auto;
-	background-color: green;
-	border: 10px;
 }
 .app-name
 {
