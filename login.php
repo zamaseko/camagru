@@ -9,7 +9,7 @@
 		<form>	
 		<div>	
 			<h2 class="app-name">camagru<h2>
-			<input type="text"  name="name" placeholder="username or email" > <br>
+			<input type="login.php"  action="POST" name="name" placeholder="username or email"> <br>
 			<input type="text" name="password" placeholder="password" > <br>
 			<input type="button" value="Login">
 		</div>
@@ -24,12 +24,13 @@
 
 <?php
 
+
 $host = 'localhost';
 $user = 'root';
 $db = 'camagru_db';
-$password = '';
-$user = $_POST['username'];
+$password = 'zandilem';
+$username = $_POST['username'];
 $passwd = $_POST['password'];
 
-
+if (!empty($username) && isset($passwd)
 ?>
