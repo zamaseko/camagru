@@ -9,7 +9,7 @@
 		<form>	
 		<div>	
 			<h2 class="app-name">camagru<h2>
-			<input type="login.php"  action="POST" name="name" placeholder="username or email"> <br>
+			<input type="login.php"  action="POST" name="name" placeholder="username"> <br>
 			<input type="text" name="password" placeholder="password" > <br>
 			<input type="button" value="Login">
 		</div>
@@ -38,9 +38,26 @@ $passwd = $_POST['password'];
 	{
 		if (isset($username) && isset($passwd)
 		{
-			$mysql = $connect->query(SELECT * FROM 'users');
+			$mysql = $connect->query(SELECT * FROM '');
 			$stmt = $connect->prepare($mysql);
 			$stmt->execute('[username]');
 			$usr = $stmt->fetch();
-
+			if($username == $usr[1])
+			{
+				if(!$passwd == $usr[4])
+				{
+					echo 'User is connected successfully';
+					session_start();
+				}
+			}
+			else 
+			{
+				echo 'Something went wrong. Try again';
+			}
+		}
+		else 
+		{
+			echo 'Username or Password is incorrect';
+		}
+	}
 ?>
