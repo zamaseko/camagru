@@ -24,7 +24,9 @@
 
 <?php
 
-$host = 'localhost';
+include_once'connection.php';
+
+$host = '127.0.0.1';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
@@ -38,7 +40,7 @@ $passwd = $_POST['password'];
 	{
 		if (isset($username) && isset($passwd)
 		{
-			$mysql = $connect->query(SELECT * FROM '');
+			$mysql = $connect->query(SELECT * FROM );
 			$stmt = $connect->prepare($mysql);
 			$stmt->execute('[username]');
 			$usr = $stmt->fetch();

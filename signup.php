@@ -16,4 +16,17 @@
 
 <?php
 
+$host = 'localhost';
+$user = 'root';
+$db = 'camagru_db';
+$password = 'zandilem';
+$username = $_POST['username'];
+$passwd = $_POST['password'];
+
+	$dsn = 'mysql:host=' $host . ';db='. $db;
+	$connect = new pdo($dsn, $user, $password);
+	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	if (empty($username) && empty($passwd) && empty($email) && empty($firstname) && empty($lastname))
+	{
+	}
 ?>
