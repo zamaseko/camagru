@@ -16,17 +16,28 @@
 
 <?php
 
-$host = 'localhost';
+$server = $'localhost';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
 $username = $_POST['username'];
 $passwd = $_POST['password'];
+$fname = $_POST['firstname'];
+$lname = $_POST['lastname'];
+$email = $_POST[''];
 
-	$dsn = 'mysql:host=' $host . ';db='. $db;
+	$dsn = "mysql:host=$server;dbname=$db";
 	$connect = new pdo($dsn, $user, $password);
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if (empty($username) && empty($passwd) && empty($email) && empty($firstname) && empty($lastname))
 	{
+		$mysql = $connect->query(INSERT INTO users);
+		$stmt = $connect->prepare($mysql);
+		$stmt->execute();
+        $usr = $stmt->fetch();
+		if(!isset($username) && !isset($passwd) && !isset($fname) && !isset($lname) && !isset($email))
+		{
+
+		}
 	}
 ?>

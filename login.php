@@ -24,23 +24,22 @@
 
 <?php
 
-include_once'connection.php';
-
-$host = '127.0.0.1';
+$server = 'localhost';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
 $username = $_POST['username'];
 $passwd = $_POST['password'];
-
-	$dsn = 'mysql:host=' $host . ';db='. $db;
+try
+{
+	$dsn = "mysql:host=$host;db=$db";
 	$connect = new pdo($dsn, $user, $password);
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if (!empty($username) && !empty($passwd)
 	{
 		if (isset($username) && isset($passwd)
 		{
-			$mysql = $connect->query(SELECT * FROM );
+			$mysql = $connect->query('SELECT * FROM users WHERE username = :username & password');
 			$stmt = $connect->prepare($mysql);
 			$stmt->execute('[username]');
 			$usr = $stmt->fetch();
@@ -57,9 +56,10 @@ $passwd = $_POST['password'];
 				echo 'Something went wrong. Try again';
 			}
 		}
-		else 
-		{
-			echo 'Username or Password is incorrect';
-		}
 	}
+}
+catch(PDOException)		
+{
+	echo 'Username or Password is incorrect';
+}
 ?>
