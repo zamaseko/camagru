@@ -25,7 +25,8 @@ $passwd = $_POST['password'];
 $fname = $_POST['firstname'];
 $lname = $_POST['lastname'];
 $email = $_POST[''];
-
+try
+{
 	$dsn = "mysql:host=$server;dbname=$db";
 	$connect = new pdo($dsn, $user, $password);
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -40,4 +41,9 @@ $email = $_POST[''];
 
 		}
 	}
+}
+catch(PDOException $e)
+{
+	echo 'Registration unsucessfull. Try again!!';
+}
 ?>
