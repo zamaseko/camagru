@@ -16,7 +16,7 @@
 
 <?php
 
-$server = $'localhost';
+$server = 'localhost';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
@@ -24,7 +24,8 @@ $username = $_POST['username'];
 $passwd = $_POST['password'];
 $fname = $_POST['firstname'];
 $lname = $_POST['lastname'];
-$email = $_POST[''];
+$email = $_POST['email_address'];
+$verified = 
 try
 {
 	$dsn = "mysql:host=$server;dbname=$db";
@@ -32,9 +33,9 @@ try
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if (empty($username) && empty($passwd) && empty($email) && empty($firstname) && empty($lastname))
 	{
-		$mysql = $connect->query(INSERT INTO users);
+		$mysql = $connect->query('INSERT INTO users(username, firstname, lastname, password, email_address, verified)');
 		$stmt = $connect->prepare($mysql);
-		$stmt->execute();
+		$stmt->execute(['usrname' => $username, 'firstname' => $fname'	)
         $usr = $stmt->fetch();
 		if(!isset($username) && !isset($passwd) && !isset($fname) && !isset($lname) && !isset($email))
 		{
