@@ -6,7 +6,7 @@ $connect = new pdo($dsn, $user, $password);
 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try
 { 
-	$sql = "CREATE TABLE 'users' IF IT DOES NOT EXIST;
+	$sql = "CREATE TABLE IF NOT EXISTS 'user;
 	(id INT(11) NOT NULL UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	username varchar(20) NOT NULL,
 	firstname varchar(20) NOT NULL,
@@ -15,19 +15,19 @@ try
 	email_address varchar(100) NOT NULL,
 	verified INT(4) NOT NULL;)";
 
-	$sql .= "CREATE TABLE 'media' IF NOT EXIST(
+	$sql .= "CREATE TABLE IF NOT EXISTS 'media'(
 	media_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	media BLOB NOT NULL,
 	media_date DATETIME NOT NULL,
 	media_name VARCHAR(40) NOT NULL,
 	media_size VARCHAR(11) NOT NULL;)";
 
-	$sql .= "CREATE TABLE likes IF NOT EXIST(
+	$sql .= "CREATE TABLE  IF NOT EXISTS 'likes'(
 	like_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	liked_media INT(11) NOT NULL,
 	like_user INT(11) NOT NULL;)";
 
-	$sql .= "CREATE TABLE comments IF NOT EXIST(
+	$sql .= "CREATE TABLE  IF NOT EXISTS 'comments'(
 	comment_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	comment_media VARCHAR(40) NOT NULL,
 	comment TEXT NOT NULL;)";

@@ -20,12 +20,12 @@ $server = 'localhost';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
-$username = $_POST['username'];
+$usrname = $_POST['username'];
 $passwd = $_POST['password'];
 $fname = $_POST['firstname'];
 $lname = $_POST['lastname'];
 $email = $_POST['email_address'];
-$verified = 
+$verified = 0;
 try
 {
 	$dsn = "mysql:host=$server;dbname=$db";
@@ -35,11 +35,11 @@ try
 	{
 		$mysql = $connect->query('INSERT INTO users(username, firstname, lastname, password, email_address, verified)');
 		$stmt = $connect->prepare($mysql);
-		$stmt->execute(['usrname' => $username, 'firstname' => $fname'	)
+		$stmt->execute(['usrname' => $username, 'firstname' => $fname, 'lastname' => $lname, 'email_address' => $email])
         $usr = $stmt->fetch();
-		if(!isset($username) && !isset($passwd) && !isset($fname) && !isset($lname) && !isset($email))
+		if(!isset($_POST['username']) && !isset($passwd) && !isset($fname) && !isset($lname) && !isset($email))
 		{
-
+			echo 'enter inf on the fields';
 		}
 	}
 }
