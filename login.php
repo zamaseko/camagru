@@ -5,42 +5,47 @@ $server = 'localhost';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
-$username = $_POST['username'];
+$usrname = $_POST['username'];
 $passwd = $_POST['password'];
 try
 {
 	$dsn = "mysql:host=$host;db=$db";
 	$connect = new pdo($dsn, $user, $password);
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	if (!empty($username) && !empty($passwd))
+	if (!empty($usrname) && !empty($passwd))
 	{
-		if (isset($username) && isset($passwd))
+		if (isset($usrname) && isset($passwd))
 		{
-			$mysql = $connect->query('SELECT * FROM users WHERE username = :username & password');
+			$mysql = $connect->query('SELECT * FROM users WHERE username = :username & :password OR passwd = :password');
 			$stmt = $connect->prepare($mysql);
-			$stmt->execute('[username]');
+			$stmt->execute(['username' => $usrname]);
 			$usr = $stmt->fetch();
-			if($username == $usr[1])
+			if($usrname == $usr[1])
 			{
 				if(!$passwd == $usr[4])
 				{
 					echo 'User is connected successfully';
-					session_start();
 				}
+				if ($usr[6] == 'no')
+					echo 'You are not a verified user. Please press the sign up and folloe the instructions given';
+				else if ($usr[6] == 'yes')
+					echo '';
+
 			}
-		
+			else 
+				echo 'congratulations'; 
 		}
 	}
 }
 catch(PDOException $e)
 {
-	echo 'Username or Password is incorrect';
+	echo 'Your Username or Password is incorrect, please try entering them again';
 }
 ?>
 
 <html>
 <head>
-	<meta http-equiv="refresh" content="2">
+	<meta http-equiv="refresh" content="30">
 	<title>Camagru-login page</title>
 	<link rel="stylesheet" href="style.css">
 </head>
