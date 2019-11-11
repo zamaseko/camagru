@@ -45,7 +45,7 @@ try
 			if(empty($usrname))
 			{
 				if($usrname < 3)
-				{
+				{:
 					echo 'Username is too short';
 				}
 				else
@@ -68,14 +68,18 @@ try
 			if (empty($passwd))
 			{
 				$passwd = $_POST['password'];
-				if(preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
+				if(!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
 				{
-					echo 'Your password is strong';
+					echo 'Your password should at least have 1 uppercase, 1 symbol and 1 number';
+				}
+				else 
+				{
+					echo 'Your Password is Strong';
 				}
 			}
-			if (isset($passwd2))
+			if (isset($passwd))
 			{
-				if(preg_match($passwd, $passwd2))
+				if(preg_match($passwd2, $passwd))
 				{
 					echo 'Passwords Match';
 				}
@@ -87,7 +91,6 @@ try
 		}  
 		else
 	  	{
-			session_start();
 			header("Location: verif.php");
 		}
 	}
