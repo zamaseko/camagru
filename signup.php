@@ -1,4 +1,4 @@
-$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);<html>
+<html>
 <head>
 </head>
 	<nav>
@@ -8,9 +8,9 @@ $email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);<html>
 	Firstname: <br><input type="text" name="fn" action="POST" ><br>
 	Surname: <br><input action="POST" name="sn"><br>
 	Username: <br><input action="POST" name="u"><br>
+	email address:<br><input type="text" name="e" action="POST"><br>
 	Password:<br><input type="password" name="p1" action="POST"><br>
 	Re-enter Password: <br><input type="password" name="p2" action="POST"><br>
-	email address:<br><input type="text" name="e" action="POST"><br>
 	<input type="submit" name="submit"  value="Register" >
 </form>
 </html>
@@ -23,6 +23,7 @@ $db = 'camagru_db';
 $password = 'zandilem';
 $usrname = $_POST['username'];
 $passwd = $_POST['password'];
+$passwd2 = $_POST['password'];
 $fname = $_POST['firstname'];
 $lname = $_POST['lastname'];
 $email = $_POST['email_address'];
@@ -33,40 +34,65 @@ try
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if (empty($usrname) && empty($passwd) && empty($email) && empty($firstname) && empty($lastname))
 	{
-	//	$mysql = $connect->query('SELECT username, password, email_address FROM users WHERE username = :username, password = :password OR email_address = :email_address');
-		$mysql = "INSERT INTO users (username, firstname, lastname, password, email_address)";
+	$mysql = $connect->query('SELECT username, password, email_address FROM users WHERE username = :username, password = :password OR email_address = :email_address');
+		//$mysql = $connect->query('INSERT INTO users (username, firstname, lastname, email_address, password');
 		$stmt = $connect->prepare($mysql);
-		$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'email_address' => $email]);
+		$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'email_address' => $email, 'password' => $passwd]);
 		$usr = $stmt->fetch();
 		$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);
 		if(!isset($_POST['username']) && !isset($passwd) && !isset($fname) && !isset($lname) && !isset($email))
 		{
-			if(filter_var($email_add, FILTER_SANITIZE_EMAIL))
+			if(empty($usrname))
 			{
-				if($_POST['password'])
+				if($usrname < 3)
 				{
-					if(strlen($passwd) < 9)
-					{
-						echo 'Password entered is too short';
-					}
-
-					else
-					{
-						echo 'Passwords do not match pleaes check an try again';
-					}
-
+					echo 'Username is too short';
 				}
-				else		
+				else
 				{
-					echo 'password correct';
+					$_SESSION['username'];
+					header('login.php');
 				}
-				}
-			else
-				echo 'Congratulations you have successfully registered, please check you email for the the verification link';
 			}
+			if(!filter_var($email_add, FILTER_SANITIZE_EMAIL))
+			{
+				if(!isset($email))
+				{
+					echo 'Please enter a valid password';
+				}
+				else
+				{	
+					$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);
+				}
+			}
+			if (empty($passwd))
+			{
+				$passwd = $_POST['password'];
+				if(preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
+				{
+					echo 'Your password is strong';
+				}
+			}
+			if (isset($passwd2))
+			{
+				if(preg_match($passwd, $passwd2))
+				{
+					echo 'Passwords Match';
+				}
+				else
+				{
+					echo 'The passwords do not match';
+				}
+			}
+		}  
+		else
+	  	{
+			session_start();
+			header("Location: verif.php");
+		}
 	}
-	echo 'You are a verified user please';
-}	
+}
+
 catch(PDOException $e)
 {
 	echo 'Registration unsucessfull. Try again!!';
