@@ -6,14 +6,14 @@ $connect = new pdo($dsn, $user, $password);
 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try
 { 
-	$sql = "CREATE TABLE IF NOT EXISTS 'user;
-	(id INT(11) NOT NULL UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	username varchar(20) NOT NULL,
-	firstname varchar(20) NOT NULL,
-	lastname varchar(20) NOT NULL,
-	password varchar(20) NOT NULL,
-	email_address varchar(100) NOT NULL,
-	verified INT(4) default 0 NOT NULL)";
+	$sql =  CREATE TABLE `camagru_db`.`users` 
+		( `id` INT NOT NULL AUTO_INCREMENT , 
+		  `username` VARCHAR(20) NOT NULL , 
+		  `firstname` VARCHAR(20) NOT NULL , `lastname` VARCHAR(20) NOT NULL , 
+		  `email_address` VARCHAR(100) NOT NULL , 
+		  `password` INT(20) NOT NULL , 
+		  `verified` INT NOT NULL DEFAULT '0',
+		  PRIMARY KEY (`id`)) ENGINE = InnoDB; 
 
 	$sql .= "CREATE TABLE IF NOT EXISTS 'media'(
 	media_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
