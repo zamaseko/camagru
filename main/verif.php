@@ -1,7 +1,6 @@
 <?php
 require_once 'config/database.php';
 
-start_session();
 $login = $_SESSION['username'];
 if($login == 'yes')
 {

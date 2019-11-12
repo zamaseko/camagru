@@ -32,72 +32,78 @@ try
 	$dsn = "mysql:host=$server;dbname=$db";
 	$connect = new pdo($dsn, $user, $password);
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	if (empty($usrname) && empty($passwd) && empty($email) && empty($firstname) && empty($lastname))
+	if (empty($usrname) && empty($passwd) && empty($passwd2) && empty($email) && empty($fname) && empty($lname))
 	{
-	$mysql = $connect->query('SELECT username, password, email_address FROM users WHERE username = :username, password = :password OR email_address = :email_address');
-		//$mysql = $connect->query('INSERT INTO users (username, firstname, lastname, email_address, password');
-		$stmt = $connect->prepare($mysql);
-		$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'email_address' => $email, 'password' => $passwd]);
-		$usr = $stmt->fetch();
-		$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);
-		if(!isset($_POST['username']) && !isset($passwd) && !isset($fname) && !isset($lname) && !isset($email))
+		if(isset($usrname) && isset($passwd) && isset($passwd2) && isset($email) && isset($fname) && isset($lname))
 		{
-			if(empty($usrname))
+		//	$mysql = $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email-address");
+			$mysql = "SELECT `id`, `username`, `firstname`, `lastname`, `password`, `email_address`, `verified` FROM `users` WHERE 1";
+			$stmt = $connect->prepare($mysql);
+			$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'email_address' => $email, 'password' => $passwd]);
+			$usr = $stmt->fetch();
 			{
-				if($usrname < 3)
-				{:
-					echo 'Username is too short';
-				}
-				else
+				if($usr[1] != $usrname && $usr[4] != $email)
 				{
-					$_SESSION['username'];
-					header('login.php');
-				}
-			}
-			if(!filter_var($email_add, FILTER_SANITIZE_EMAIL))
-			{
-				if(!isset($email))
-				{
-					echo 'Please enter a valid password';
-				}
-				else
-				{	
 					$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);
-				}
-			}
-			if (empty($passwd))
-			{
-				$passwd = $_POST['password'];
-				if(!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
-				{
-					echo 'Your password should at least have 1 uppercase, 1 symbol and 1 number';
-				}
-				else 
-				{
-					echo 'Your Password is Strong';
-				}
-			}
-			if (isset($passwd))
-			{
-				if(preg_match($passwd2, $passwd))
-				{
-					echo 'Passwords Match';
+					if(filter_var($email_add, FILTER_SANITIZE_EMAIL))
+					{
+						if(preg_match($passwd2, $passwd))
+						{
+							if(!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
+							{
+								echo 'Your password should at least have 1 uppercase, 1 symbol and 1 number';
+							}
+						}
+						else
+						{
+							$pass = $usrname . $email_Add;
+							$phash = md5($pass);
+							$email_cont = "Regitration for Camagru";
+							$head = "From noreply@camagruteam.co.za" . "\n";
+							$head .= 'MIME-Version: 1.0' . "\n";
+							$head .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+							$content = "Welcome $fname $lname. <br> You have successfully signed up for Camagru. <br>
+							as a new member is simple to login. Just use $usrname and $passwd to login. <br>
+							The follwing email is to verify you as a member.Please click the link and follow to verify and
+							activate your account. <br>
+							Please check if this is you <br>	
+							
+							Username: $usrname <br>
+								If this is your chosen username please click the link below: <br>
+							<a href='http://localhost:8080/camagru/register.php?'>Click me </a><br><br>
+							From: The Camagru team";
+					
+							$mysql = "INSERT INTO `users`( `username`, `firstname`, `lastname`, `password`, `email_address`) VALUES (?, ?, ?, ?, ?, )";
+							$stmt = $connect->prepare($mysql);
+							$stmt->execute([$usrname, $fname,$lname, $passwd, $email_address]);
+							if (mail($email_add, $email_cont, $content, $head))
+							{
+								echo 'Verification email successfully received';
+							}
+							else 
+							{
+								echo 'There was an error, the email was not properly sent';
+							}
+						}	
+					}
+					else 
+					{
+						echo 'Please add a valid email address';
+					}
 				}
 				else
 				{
-					echo 'The passwords do not match';
+					echo 'please proceed';
 				}
 			}
-		}  
+		}
 		else
-	  	{
-			header("Location: verif.php");
+		{
+			echo 'Fill in all relevant fields';
 		}
 	}
-}
-
+}	
 catch(PDOException $e)
 {
 	echo 'Registration unsucessfull. Try again!!';
 }
-?>

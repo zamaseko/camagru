@@ -1,8 +1,8 @@
 <?php
 $server = 'localhost';
-$username = 'root';
+$user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
-$dsn = "mysql:host=$host;db=$db";
+$dsn = "mysql:host=$server;dbname=$db";
 $connect = new pdo($dsn, $user, $password);
 ?>
