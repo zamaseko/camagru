@@ -47,12 +47,16 @@ try
 					$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);
 					if(filter_var($email_add, FILTER_SANITIZE_EMAIL))
 					{
-						if(preg_match($passwd2, $passwd))
+						if($passwd == $passwd2
 						{
 							if(!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
 							{
 								echo 'Your password should at least have 1 uppercase, 1 symbol and 1 number';
 							}
+							//if(strlen($passwd) < 8)
+							//{
+						//		echo 'The password is too short';
+						//	}
 						}
 						else
 						{
@@ -73,13 +77,14 @@ try
 							<a href='http://localhost:8080/camagru/register.php?'>Click me </a><br><br>
 							From: The Camagru team";
 					
-							$mysql = "INSERT INTO `users`( `username`, `firstname`, `lastname`, `password`, `email_address`) VALUES (?, ?, ?, ?, ?, )";
+							$connect = new PDO($dsn, $user, $password );
+							$mysql = "INSERT INTO `users`(`id`, `username`, `firstname`, `lastname`, `password`, `email_address`, `verified`) VALUES ([?], [?], [?],[?], [?], [?], [?])";
 							$stmt = $connect->prepare($mysql);
 							$stmt->execute([$usrname, $fname,$lname, $passwd, $email_address]);
 							if (mail($email_add, $email_cont, $content, $head))
 							{
 								echo 'Verification email successfully received';
-							}
+							} 
 							else 
 							{
 								echo 'There was an error, the email was not properly sent';
@@ -107,3 +112,4 @@ catch(PDOException $e)
 {
 	echo 'Registration unsucessfull. Try again!!';
 }
+$connect = null;
