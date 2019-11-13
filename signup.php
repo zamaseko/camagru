@@ -4,14 +4,14 @@
 	<nav>
 	<h2>camagru</h2>
 	</nav>
-<form>
-	Firstname: <br><input type="text" name="fn" action="POST" ><br>
-	Surname: <br><input action="POST" name="sn"><br>
-	Username: <br><input action="POST" name="u"><br>
-	email address:<br><input type="text" name="e" action="POST"><br>
-	Password:<br><input type="password" name="p1" action="POST"><br>
-	Re-enter Password: <br><input type="password" name="p2" action="POST"><br>
-	<input type="submit" name="submit"  value="Register" >
+<form action="signup.php" method="POST">
+	Firstname: <br><input type="text" name="fn" ><br>
+	lastname: <br><input type="text" name="sn"><br>
+	Username: <br><input type="text" name="u"><br>
+	email address:<br><input type="text" name="e" ><br>
+	Password:<br><input type="password" name="p1" ><br>
+	Re-enter Password: <br><input type="password" name="p2" ><br>
+	<input type="submit" value="Register" >
 </form>
 </html>
 
@@ -21,12 +21,12 @@ $server = 'localhost';
 $user = 'root';
 $db = 'camagru_db';
 $password = 'zandilem';
-$usrname = $_POST['username'];
-$passwd = $_POST['password'];
-$passwd2 = $_POST['password'];
-$fname = $_POST['firstname'];
-$lname = $_POST['lastname'];
-$email = $_POST['email_address'];
+$usrname = $_POST['u'];
+$passwd = $_POST['p1'];
+$passwd2 = $_POST['p2'];
+$fname = $_POST['fn'];
+$lname = $_POST['sn'];
+$email = $_POST['e'];
 try
 {
 	$dsn = "mysql:host=$server;dbname=$db";
@@ -36,13 +36,13 @@ try
 	{
 		if(isset($usrname) && isset($passwd) && isset($passwd2) && isset($email) && isset($fname) && isset($lname))
 		{
-		//	$mysql = $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email-address");
-			$mysql = "SELECT `id`, `username`, `firstname`, `lastname`, `password`, `email_address`, `verified` FROM `users` WHERE 1";
+			$mys= $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email-address");
+			//$my = $connect->prepare('SELECT username, firstname, lastname, pass_word, email_address FROM users WHERE username = :username or email_address = :email_address');
 			$stmt = $connect->prepare($mysql);
-			$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'email_address' => $email, 'password' => $passwd]);
+			$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'pass_word' => $passwd, 'email_address' => $email]);
 			$usr = $stmt->fetch();
 			{
-				if($usr[1] != $usrname && $usr[4] != $email)
+				if($usr[1] != $usrname && $usr[5] != $email)
 				{
 					$email_add = filter_var($email_add, FILTER_SANITIZE_EMAIL);
 					if(filter_var($email_add, FILTER_SANITIZE_EMAIL))
@@ -73,8 +73,8 @@ try
 							<a href='http://localhost:8080/camagru/register.php?'>Click me </a><br><br>
 							From: The Camagru team";
 					
-							$mysql = "INSERT INTO `users`( `username`, `firstname`, `lastname`, `password`, `email_address`) VALUES (?, ?, ?, ?, ?, )";
-							$stmt = $connect->prepare($mysql);
+							$mysq = $connect->query('INSERT INTO users (username, firstname, lastname, pass_word, email_address) VALUES (?, ?, ?, ?, ?)');
+							$stmt = $connect->prepare($mysq);
 							$stmt->execute([$usrname, $fname,$lname, $passwd, $email_address]);
 							if (mail($email_add, $email_cont, $content, $head))
 							{
@@ -107,3 +107,4 @@ catch(PDOException $e)
 {
 	echo 'Registration unsucessfull. Try again!!';
 }
+?>
