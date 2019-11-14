@@ -10,7 +10,8 @@ try
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	echo 'Connection to database is successfull';
 }
-catch(PDOException)
+catch(PDOException $e)
 {
-	echo 'Connection failed'}
+	echo 'Connection failed';
+}
 ?>

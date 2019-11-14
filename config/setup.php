@@ -33,12 +33,20 @@ try
 			(`comment_id` INT NOT NULL AUTO_INCREMENT , 
 		  	`comment_media` INT(40) NOT NULL ,
 		  	`comment` TEXT NOT NULL ,
-		  	PRIMARY KEY (`comment_id`)) ENGINE = InnoDB;
+			PRIMARY KEY (`comment_id`)) ENGINE = InnoDB;
+try
+{
+	$connect->exec($sql);
+	echo 'The Table was created'; 
+}
+catch($PDOException $e)
+{
+	echo 'Tables were not created';
+}
 
 //exec()used because it executes an external program and returns the last line of the output
 //also used because no results are returned.
 $sql = " INSERT INTO user (id,  username, firstname, lastname, password, email_address, verified)";
-$connect->exec($sql);
 }
 catch(PDOException $e)
 {
