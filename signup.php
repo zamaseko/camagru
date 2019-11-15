@@ -1,17 +1,19 @@
 <html>
 <head>
+	<title>Camagru -Sign up </title>
+	<link rel="stylesheet" href="style.css">
 </head>
-	<nav>
-	<h2>camagru</h2>
-	</nav>
-<form action="signup.php" method="POST">
-	Firstname: <br><input type="text" name="fn" ><br>
-	lastname: <br><input type="text" name="sn"><br>
-	Username: <br><input type="text" name="u"><br>
-	email address:<br><input type="text" name="e" ><br>
-	Password:<br><input type="password" name="p1" ><br>
-	Re-enter Password: <br><input type="password" name="p2" ><br>
-	<input type="submit" value="Register" >
+<div class="box2">
+	<h2 class="app-name">camagru</h2>
+	<form action="signup.php" method="POST">
+		Firstname: <br><input type="text" name="fn" ><br>
+		lastname: <br><input type="text" name="sn"><br>
+		Username: <br><input type="text" name="u"><br>
+		email address:<br><input type="text" name="e" ><br>
+		Password:<br><input type="password" name="p1" ><br>
+		Re-enter Password: <br><input type="password" name="p2" ><br>
+		<input type="submit" value="Register" >
+</div>
 </form>
 </html>
 
@@ -29,15 +31,12 @@ $lname = $_POST['sn'];
 $email = $_POST['e'];
 try
 {
-	// $dsn = "mysql:host=$server;dbname=$db";
-	// $connect = new pdo($dsn, $user, $password);
-	// $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	if (!empty($usrname) && !empty($passwd) && !empty($passwd2) && !empty($email) && !empty($fname) && !empty($lname))
 	{
+		
 		if(isset($usrname) && isset($passwd) && isset($passwd2) && isset($email) && isset($fname) && isset($lname))
 		{
 			$mys= $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email-address");
-			//$my = $connect->prepare('SELECT username, firstname, lastname, pass_word, email_address FROM users WHERE username = :username or email_address = :email_address');
 			$stmt = $connect->prepare($mys);
 			$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'pass_word' => $passwd, 'email_address' => $email]);
 			$usr = $stmt->fetch();
@@ -46,8 +45,8 @@ try
 				{
 					if(filter_var(trim($email), FILTER_VALIDATE_EMAIL))
 					{
-						if($passwd == $passwd2
-						{
+						if($passwd == $passwd)
+						{ die();
 							if(!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
 							{
 								echo 'Your password should at least have 1 uppercase, 1 symbol and 1 number';
@@ -59,6 +58,8 @@ try
 						}
 						else
 						{
+							var_dump("hello");
+							die();
 							$pass = $usrname . $email;
 							$phash = md5($pass);
 							$email_cont = "Regitration for Camagru";
@@ -76,12 +77,10 @@ try
 							<a href='http://localhost:8080/camagru/register.php?q=$phash'>Click me </a><br><br>
 							From: The Camagru team";
 					
-<<<<<<< HEAD
-							// $mysq = $connect->query('INSERT INTO users (username, firstname, lastname, pass_word, email_address) VALUES (?, ?, ?, ?, ?)');
-							// $stmt = $connect->prepare($mysq);
 							var_dump("we are here");
 
 							try {
+
 								$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address)VALUES (:username, :firstname, :lastname, :pass_word, :email_address)");
 								$signup->bindParam(':username', $usrname);
 								$signup->bindParam(':firstname', $fname);
@@ -101,21 +100,22 @@ try
 								{
 									echo 'There was an error, the email was not properly sent';
 								}
-							} else {
+							} 
+							else
+							{
 								echo 'There was an error saving user to the database';
-=======
+							}
 							$connect = new PDO($dsn, $user, $password );
-							$mysql = "INSERT INTO `users`(`id`, `username`, `firstname`, `lastname`, `password`, `email_address`, `verified`) VALUES ([?], [?], [?],[?], [?], [?], [?])";
+							$mysql = "INSERT INTO users(username, firstname, lastname, pass_word , email_address) VALUES (:username, :firstname, :lastname, :pass_word, email_address)";
 							$stmt = $connect->prepare($mysql);
 							$stmt->execute([$usrname, $fname,$lname, $passwd, $email_address]);
-							if (mail($email_add, $email_cont, $content, $head))
+							if (mail($email, $email_cont, $content, $head))
 							{
 								echo 'Verification email successfully received';
 							} 
 							else 
 							{
 								echo 'There was an error, the email was not properly sent';
->>>>>>> 35fc562b240289c64b40dc70568a68fdcbfd8d06
 							}
 							
 							
@@ -142,8 +142,3 @@ catch(PDOException $e)
 {
 	echo 'Registration unsucessfull. Try again!!';
 }
-<<<<<<< HEAD
-?>
-=======
-$connect = null;
->>>>>>> 35fc562b240289c64b40dc70568a68fdcbfd8d06
