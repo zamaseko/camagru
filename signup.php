@@ -1,17 +1,17 @@
 <html>
 <head>
-<!--	<title>Camagru -Sign up </title>
+	<title>Camagru -Sign up </title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <div class="box2">
-	<h2 class="app-name">camagru</h2> -->
+	<h2 class="app-name">camagru</h2> 
 	<form action="signup.php" method="POST">
 		Firstname: <br><input type="text" name="fn" required><br>
-		lastname: <br><input type="text" name="sn" requird><br>
-		Username: <br><input type="text" name="u"><br>
-		email address:<br><input type="email" name="e" ><br>
+		lastname: <br><input type="text" name="sn" required><br>
+		Username: <br><input type="text" name="u" required><br>
+		email address:<br><input type="email" name="e" required><br>
 		Password:<br><input type="password" name="p1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
-		Re-enter Password: <br><input type="password" name="p2" ><br>
+		Re-enter Password: <br><input type="password" name="p2" required><br>
 		<input type="submit" value="Register" >
 <!--/div-->
 </form>
@@ -102,7 +102,7 @@ try
 						} catch (Exception $e) {
 							echo 'Error: ' . $e->getMessage();
 						}
-
+	
 						// $mysq = "INSERT INTO users(username, firstname, lastname, pass_word , email_address) VALUES (:username, :firstname, :lastname, :pass_word, :email_address)";
 						// $stmt = $connect->prepare($mysq);
 						// try {
