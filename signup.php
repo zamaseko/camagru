@@ -48,7 +48,7 @@ try
 					{
 						$pass = $usrname;
 						$phash = md5($pass);
-						$email_cont = "Regiistration for Camagru";
+						$email_cont = "Registration for Camagru";
 						$head = "From noreply@camagruteam.co.za" . "\r\n";
 						$head .= 'MIME-Version: 1.0' . "\r\n";
 						$head .= 'Content-type:text/html; 
