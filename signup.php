@@ -1,28 +1,29 @@
 <html>
 <head>
-	<title>Camagru -Sign up </title>
+<!--	<title>Camagru -Sign up </title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <div class="box2">
-	<h2 class="app-name">camagru</h2>
+	<h2 class="app-name">camagru</h2> -->
 	<form action="signup.php" method="POST">
-		Firstname: <br><input type="text" name="fn" ><br>
-		lastname: <br><input type="text" name="sn"><br>
+		Firstname: <br><input type="text" name="fn" required><br>
+		lastname: <br><input type="text" name="sn" requird><br>
 		Username: <br><input type="text" name="u"><br>
-		email address:<br><input type="text" name="e" ><br>
-		Password:<br><input type="password" name="p1" ><br>
+		email address:<br><input type="email" name="e" ><br>
+		Password:<br><input type="password" name="p1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
 		Re-enter Password: <br><input type="password" name="p2" ><br>
 		<input type="submit" value="Register" >
-</div>
+<!--/div-->
 </form>
 </html>
 
 <?php
 include "./config/database.php";
-$server = 'localhost';
-$user = 'root';
-$db = 'camagru_db';
-$password = 'zandilem';
+
+//$server = 'localhost';
+//$user = 'root';
+//$db = 'camagru_db';
+//$password = 'zandilem';
 $usrname = $_POST['u'];
 $passwd = $_POST['p1'];
 $passwd2 = $_POST['p2'];
@@ -45,81 +46,82 @@ try
 				{
 					if(filter_var(trim($email), FILTER_VALIDATE_EMAIL))
 					{
-						if($passwd == $passwd)
-						{ die();
-							if(!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $passwd))
-							{
-								echo 'Your password should at least have 1 uppercase, 1 symbol and 1 number';
-							}
-							//if(strlen($passwd) < 8)
-							//{
-						//		echo 'The password is too short';
-						//	}
+						$pass = $usrname;
+						$phash = md5($pass);
+						$email_cont = "Regiistration for Camagru";
+						$head = "From noreply@camagruteam.co.za" . "\r\n";
+						$head .= 'MIME-Version: 1.0' . "\r\n";
+						$head .= 'Content-type:text/html; 
+						charset=iso-8859-1' . "\r\n";
+						$content = "Welcome $fname $lname. <br> You have successfully signed up for Camagru. <br>
+						as a new member is simple to login. Just use $usrname and $passwd to login. <br>
+						The follwing email is to verify you as a member.Please click the link and follow to verify and
+						activate your account. <br>
+						Please check if this is you <br><br>
+						Username: $usrname <br><br>
+						If this is your chosen username please click the link below: <br>
+						<a href='http://localhost:8080/camagru/register.php?q=$phash'>Click me </a><br><br>
+						From: The Camagru team";
+			
+						try {
+
+							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address)VALUES (?, ?, ?, ?, ?)");
+							$signup->bindParam(':username', $usrname);
+							$signup->bindParam(':firstname', $fname);
+							$signup->bindParam(':lastname', $lname);
+							$signup->bindParam(':pass_word', $passwd);
+							$signup->bindParam(':email_address', $email);
+							$signup->execute();
+						} catch (Exception $e) {
+							echo $e->getMessage();
 						}
-						else
-						{
-							var_dump("hello");
-							die();
-							$pass = $usrname . $email;
-							$phash = md5($pass);
-							$email_cont = "Regitration for Camagru";
-							$head = "From noreply@camagruteam.co.za" . "\r\n";
-							$head .= 'MIME-Version: 1.0' . "\r\n";
-							$head .= 'Content-type:text/html; 
-							charset=iso-8859-1' . "\r\n";
-							$content = "Welcome $fname $lname. <br> You have successfully signed up for Camagru. <br>
-							as a new member is simple to login. Just use $usrname and $passwd to login. <br>
-							The follwing email is to verify you as a member.Please click the link and follow to verify and
-							activate your account. <br>
-							Please check if this is you <br><br>
-							Username: $usrname <br><br>
-							If this is your chosen username please click the link below: <br>
-							<a href='http://localhost:8080/camagru/register.php?q=$phash'>Click me </a><br><br>
-							From: The Camagru team";
-					
-							var_dump("we are here");
-
-							try {
-
-								$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address)VALUES (:username, :firstname, :lastname, :pass_word, :email_address)");
-								$signup->bindParam(':username', $usrname);
-								$signup->bindParam(':firstname', $fname);
-								$signup->bindParam(':lastname', $lname);
-								$signup->bindParam(':pass_word', $passwd);
-								$signup->bindParam(':email_address', $email);
-								$signup->execute();
-							} catch (Exception $e) {
-								echo $e->getMessage();
-							}
-							if ($signup) {
-								if (mail($email, $email_cont, $content, $head))
-								{
-									echo 'Verification email successfully received';
-								}
-								else 
-								{
-									echo 'There was an error, the email was not properly sent';
-								}
-							} 
-							else
-							{
-								echo 'There was an error saving user to the database';
-							}
-							$connect = new PDO($dsn, $user, $password );
-							$mysql = "INSERT INTO users(username, firstname, lastname, pass_word , email_address) VALUES (:username, :firstname, :lastname, :pass_word, email_address)";
-							$stmt = $connect->prepare($mysql);
-							$stmt->execute([$usrname, $fname,$lname, $passwd, $email_address]);
+						if ($signup) {
 							if (mail($email, $email_cont, $content, $head))
 							{
 								echo 'Verification email successfully received';
-							} 
+							}
 							else 
 							{
 								echo 'There was an error, the email was not properly sent';
 							}
-							
-							
-						}	
+						} 
+						else
+						{
+							echo 'There was an error saving user to the database';
+						}
+						// $connect = new PDO($dsn, $user, $password );
+
+						try {
+							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address)VALUES (:username, :firstname, :lastname, :pass_word, :email_address)");
+							$signup->bindParam(':username', $usrname);
+							$signup->bindParam('firstname', $fname);
+							$signup->bindParam('lastname', $lname);
+							$signup->bindParam(':pass_word', $passwd);
+							$signup->bindParam(':email_address', $email);
+							$signup->execute();
+						} catch (Exception $e) {
+							echo 'Error: ' . $e->getMessage();
+						}
+
+						// $mysq = "INSERT INTO users(username, firstname, lastname, pass_word , email_address) VALUES (:username, :firstname, :lastname, :pass_word, :email_address)";
+						// $stmt = $connect->prepare($mysq);
+						// try {
+						// 	$stmt->execute([$usrname, $fname,$lname, $passwd, $email]);
+						// } catch(PDOException $e)
+						// {
+						// 	echo $e;
+						// }
+						// var_dump($connect);
+						var_dump($stmt);
+						die();
+						if (mail($email, $email_cont, $content, $head))
+						{
+							echo 'Verification email successfully received';
+						} 
+						else 
+						{
+							echo 'There was an error, the email was not properly sent';
+						}
 					}
 					else 
 					{
@@ -142,3 +144,5 @@ catch(PDOException $e)
 {
 	echo 'Registration unsucessfull. Try again!!';
 }
+
+
