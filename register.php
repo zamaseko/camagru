@@ -10,13 +10,12 @@ $passwd = $_POST['pass_word'];
 $mysql = 'INSERT INTO `camagru_db` users (username, email_address, pass_word) VALUE ($usrname, $email, $passwd)';
 try
 {
-    $connect->prepare();
+    $connect->prepare($mysql);
     $connect->exec($mysql);
     if($email_address)
     {
         echo "Press the link to continue";
-        header(Location: login.php);
-        
+        header('Location: login.php');
     }
 }
 ?>
