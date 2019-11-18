@@ -18,9 +18,9 @@ try
 			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 		 	username varchar(20) NOT NULL , 
 		  	firstname varchar(20) NOT NULL , 
-		  	lastname varchar(20) NOT NULL , 
+			lastname varchar(20) NOT NULL , 
+			password varchar(255) NOT NULL ,
 		  	email_address text  NOT NULL , 
-		  	password varchar(255) NOT NULL , 
 			verified int(1) NOT NULL DEFAULT 0
 			)"; 
 			$connect->exec($sql1);
