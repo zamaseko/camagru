@@ -59,6 +59,6 @@ try
 }
 catch(PDOException $e)
 {
-	echo 'Your Username or Password is incorrect, please try entering them again';
+	echo $e; // 'Your Username or Password is incorrect, please try entering them again';
 }
 ?>

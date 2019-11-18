@@ -1,16 +1,16 @@
 <?php
 $server = 'localhost';
-$user_db = 'root';
+$user = 'root';
 $passwd = 'zandilem';
 $db = 'camagru_db';
+$dsn = "mysql:$server;dbname=$db";
 
-$connect = mysqli_connect($server, $user_db, $passwd, $db);
-if (!$connect)
+try
 {
-    echo 'No connection established';
+	$connect = new PDO($dsn, $user, $passwd);
 }
-else 
+catch(PDOException $e)
 {
-    echo 'Connected to '.$db;
+	echo $e;
 }
 ?>

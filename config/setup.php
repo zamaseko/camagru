@@ -2,64 +2,60 @@
 
 include 'database.php';
 
-$connect = new PDO($dsn, $user, $password);
-$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$server = 'localhost';
+$user = 'root';
+$password = 'zandilem';
+$dsns = "mysql:host=$server";
 try
 {
-	
-	$sql =  "CREATE TABLE IF NOT EXIST users 
-			(`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-		 	`username` VARCHAR(20) NOT NULL , 
-		  	`firstname` VARCHAR(20) NOT NULL , 
-		  	`lastname` VARCHAR(20) NOT NULL , 
-		  	`email_address` TEXT  NOT NULL , 
-		  	`password` VARCHAR(20) NOT NULL , 
-			`verified` INT(1) NOT NULL DEFAULT 0)"; 
+	$connect = new PDO($dsns, $user, $password);
+	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$mysq = "CREATE DATABASE camagru_db";
+	$connect->exec($mysq);
+	echo "Database successfully created<br>";
+
+		$sql1 =  "CREATE TABLE camagru_db.users (
+			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+		 	username varchar(20) NOT NULL , 
+		  	firstname varchar(20) NOT NULL , 
+		  	lastname varchar(20) NOT NULL , 
+		  	email_address text  NOT NULL , 
+		  	password varchar(255) NOT NULL , 
+			verified int(1) NOT NULL DEFAULT 0
+			)"; 
+			$connect->exec($sql1);
+			echo "Users table created successfully<br>";
 			
-			$connect->exec($sql);
+			$sql2 = "CREATE TABLE camagru_db.media (
+			media_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+		  	media text NOT NULL , 
+		  	media_date timestamp NOT NULL , 
+		  	media_name text NOT NULL , 
+			media_size varchar(255) NOT NULL
+			)";  
+			$connect->exec($sql2);
+	echo "Media table created successfully<br>";
+
+		$sql3 = "CREATE TABLE camagru_db.likes (
+			like_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		  	like_media int NOT NULL DEFAULT 0 , 
+			like_path text NOT NULL
+				)"; 
+			$connect->exec($sql3); 
+			echo "Likes table created successfully<br>";
+			
+			$sql4 = "CREATE TABLE camagru_db.comments (
+			comment_id int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+		  	comment_media varchar(40) NOT NULL ,
+			comment text NOT NULL
+			)";
+			$connect->exec($sql4);
+			echo "Comments table created successfully<br>";
 }
 catch(PDOException $e)
 {
-	echo "Users table not created successfully\n"; 
+	echo $e;//'Users table not created successfully';
 }
-try
-{
-	$sql = "CREATE TABLE IF NOT EXIST media 
-			(`media_id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-		  	`media` TEXT NOT NULL , 
-		  	`media_date` TIMESTAMP NOT NULL , 
-		  	`media_name` TEXT NOT NULL , 
-		  	`media_size` VARCHAR(255) NOT NULL)";  
-			
-			$connect->exec($sql);
-}
-catch(PDOException $e)
-{
-	echo 'Users table not created successfully'; 
-}
-try
-{
-	$sql = "CREATE TABLE IF NOT EXIST likes 
-			(`like_id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		  	`like_media` INT(11) NOT NULL , 
-			`like` INT(11) NOT NULL)"; 
-			
-			$connect->exec($sql); 
-}
-catch(PDOException $e)
-{
-	echo "Likes table not created successfully\n"; 
-}
-try
-{		
-			$sql .= "CREATE TABLE IF NOT EXIST comment 
-			(`comment_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-		  	`comment_media` INT(40) NOT NULL ,
-		  	`comment` TEXT NOT NULL)";
-			
-}
-			catch(PDOException $e)
-{
-	echo $e;//'Users table not created successfully'; 
-}
+
+$connect = null;
 ?>
