@@ -19,10 +19,11 @@ try
 		 	username varchar(20) NOT NULL , 
 		  	firstname varchar(20) NOT NULL , 
 			lastname varchar(20) NOT NULL , 
-			password varchar(255) NOT NULL ,
+			pass_word varchar(255) NOT NULL ,
 		  	email_address text  NOT NULL , 
-			verified int(1) NOT NULL DEFAULT 0
-			)"; 
+			verified int(1) NOT NULL DEFAULT 0,
+			vkey varchar(255) NOT NULL
+			)";
 			$connect->exec($sql1);
 			echo "Users table created successfully<br>";
 			

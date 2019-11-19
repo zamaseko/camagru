@@ -1,4 +1,7 @@
 <?php
+
+include "database.php";
+
 $server = 'localhost';
 $user = 'root';
 $passwd = 'zandilem';
