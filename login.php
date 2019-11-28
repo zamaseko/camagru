@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="box">
-		<form>	
+		<form action="login.php" method>	
 		<div>	
 			<h2 class="app-name">camagru<h2>
 			<input type="login.php"  method="POST"  placeholder="username"> <br>
@@ -59,6 +59,6 @@ try
 }
 catch(PDOException $e)
 {
-	echo $e; // 'Your Username or Password is incorrect, please try entering them again';
+	echo 'Your Username or Password is incorrect, please try entering them again';
 }
 ?>

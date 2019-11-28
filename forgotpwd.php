@@ -33,7 +33,7 @@ try
 		if ($usr['email_address'])
 		{
 			$pass = $usr['email_address'];
-			$phash = hash('sha512', $pass);
+			$phash = hash('md5', $pass);
 			$email_cont = "Camagru Forgot Password";
    			$head = "From noreply@camagruteam.co.za" . "\r\n";
    			$head .= 'MIME-Version: 1.0' . "\r\n";
