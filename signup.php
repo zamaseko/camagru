@@ -48,48 +48,36 @@ try
 						$vkey = "0123456789ABCDEFGHIJKLMNaoOvkfirutbeifgnhgkwjhD";
 						$vkey = str_shuffle($vkey);
 						$vkey = substr($vkey,0,30);
-<<<<<<< HEAD
 						$pass = $usrname;
 						$phash = md5($passwd);
-=======
-						$pass = $usrname . $email;
-						$phash = md5($pass);
->>>>>>> 4d026e498963eb34d110163a354356168c8d2115
 						$email_cont = "Registration for Camagru";
 						$head = "From noreply@camagruteam.co.za" . "\n\r";
 						$head .= 'MIME-Version: 1.0' . "\n\r";
 						$head .= 'Content-type:text/html; 
 						charset=iso-8859-1' . "\n\r";
 						$content = "Welcome $fname $lname. <br> You have successfully signed up for Camagru. <br>
-						as a new member is simple to login. Just use $usrname and your username to login. <br>
+						as a new member is simple to login. Just use $usrname and $passwd to login. <br>
 						The follwing email is to verify you as a member.Please click the link and follow to verify and
 						activate your account. <br>
 						Please check if this is you <br><br>
 						Username: $usrname <br><br>
 						If this is your chosen username please click the link below: <br>
 						<a href='http://localhost:8080/camagru/register.php?action=signup&email=$email&vk=$vkey'>Click me </a><br><br>
-						The Camagru team";
+						From: The Camagru team";
 			
 						try {
-<<<<<<< HEAD
 							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address, vkey)VALUES (:username, :firstname, :lastname, :pass_word, :email_address, :vkey)");
-=======
-							//$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address, vkey)VALUES (?, ?, ?, ?, ?, ?)");
-							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address, vkey) VALUES (:username, :firstname, :lastname, :pass_word, :email_address, :vkey)");
->>>>>>> 4d026e498963eb34d110163a354356168c8d2115
 							$signup->bindParam(':username', $usrname);
 							$signup->bindParam(':firstname', $fname);
 							$signup->bindParam(':lastname', $lname);
 							$signup->bindParam(':pass_word', md5($passwd));
 							$signup->bindParam(':email_address', $email);
-						//	$signup->bindParam(':vkey', $vkey);
+							$signup->bindParam(':vkey', $vkey);
 							$signup->execute();
 						} catch (Exception $e) {
 							echo $e->getMessage();
 						}
-						if ($signup) 
-						{
-							
+						if ($signup) {
 							if (mail($email, $email_cont, $content, $head))
 							{
 								echo 'Verification email successfully received';
