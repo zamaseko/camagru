@@ -12,24 +12,30 @@
 </html>
 
 <?php
-$email = $_GET['email'];
-$cpwd = $_POST['p1'];
-$cpwd2 = $_POST['p2'];
-if(!empty($cpwd))
+try
 {
-	if(isset($cpwd) && isset($cpwd2))
+	$email = $_GET['email'];
+	$cpwd = $_POST['p1'];
+	$cpwd2 = $_POST['p2'];
+	if(!empty($cpwd))
 	{
-		if($cpwd == $cpwd2)
+		if(isset($cpwd) && isset($cpwd2))
 		{
-			header("Location:passc.php?email=$email&p=$cpwd");
+			if($cpwd == $cpwd2)
+			{
+				header("Location:passc.php?email=$email&p=$cpwd");
+			}
 		}
+		else 
+			echo 'fill in the desired fields';
 	}
 	else 
-		echo 'fill in the desired fields';
+	{
+		echo 'Fill in desired fields';
+	}
 }
-else 
+catch(PDOException $e)
 {
-	echo 'Fill in desired fields';
+	echo $e;
 }
 ?>
-	

@@ -14,13 +14,13 @@ try
 	$connect->exec($mysq);
 	echo "Database successfully created<br>";
 
-		$sql1 =  "CREATE TABLE camagru_db.users (
+		$sql1 = "CREATE TABLE camagru_db.users (
 			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-		 	username varchar(20) NOT NULL , 
+		 	username varchar(20) NOT NULL UNIQUE KEY  , 
 		  	firstname varchar(20) NOT NULL , 
 			lastname varchar(20) NOT NULL , 
 			pass_word varchar(255) NOT NULL ,
-		  	email_address text  NOT NULL , 
+		  	email_address varchar(255)  NOT NULL UNIQUE KEY, 
 			verified int(1) NOT NULL DEFAULT 0,
 			vkey varchar(255) NOT NULL
 			)";

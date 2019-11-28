@@ -39,7 +39,7 @@ try
 		{
 			$dsn = "mysql:host=$server;dbname=$db";
 			$connect = new PDO($dsn, $user, $password);
-			$mys= $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email-address");
+			$mys= $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email_address");
 			$stmt = $connect->prepare($mys);
 			$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'pass_word' => $passwd, 'email_address' => $email]);
 			$usr = $stmt->fetch();
@@ -48,6 +48,9 @@ try
 				{
 					if(filter_var(trim($email), FILTER_VALIDATE_EMAIL))
 					{
+						$vkey = "123456789ABCDEFGHIJKLMNavkfirutbeifgnhgkwjhD";
+						$vkey = str_shuffle($vkey);
+						$vkey = substr($vkey,0,30);
 						$pass = $usrname;
 						$phash = md5($pass);
 						$email_cont = "Registration for Camagru";
@@ -62,16 +65,18 @@ try
 						Please check if this is you <br><br>
 						Username: $usrname <br><br>
 						If this is your chosen username please click the link below: <br>
-						<a href='http://localhost:8080/camagru/register.php?vk=$phash'>Click me </a><br><br>
+						<a href='http://localhost:8080/camagru/register.php?action=signup&email=$email&vk=$vkey'>Click me </a><br><br>
 						From: The Camagru team";
 			
 						try {
-							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address)VALUES (?, ?, ?, ?, ?)");
+							//$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address, vkey)VALUES (?, ?, ?, ?, ?, ?)");
+							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address, vkey)VALUES (:username, :firstname, :lastname, :pass_word, :email_address, :vkey)");
 							$signup->bindParam(':username', $usrname);
 							$signup->bindParam(':firstname', $fname);
 							$signup->bindParam(':lastname', $lname);
 							$signup->bindParam(':pass_word', $passwd);
 							$signup->bindParam(':email_address', $email);
+							$signup->bindParam(':vkey', $vkey);
 							$signup->execute();
 						} catch (Exception $e) {
 							echo $e->getMessage();
@@ -91,17 +96,17 @@ try
 							echo 'There was an error saving user to the database';
 						}
 						 //$connect = new PDO($dsn, $user, $password );
-						try {
-							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address)VALUES (:username, :firstname, :lastname, :pass_word, :email_address)");
-							$signup->bindParam(':username', $usrname);
-							$signup->bindParam(':firstname', $fname);
-							$signup->bindParam(':lastname', $lname);
-							$signup->bindParam(':pass_word', $passwd);
-							$signup->bindParam(':email_address', $email);
-							$signup->execute();
-						} catch (Exception $e) {
-							echo 'Error: ' . $e->getMessage();
-						}
+					//	try {
+					//		$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address)VALUES (:username, :firstname, :lastname, :pass_word, :email_address)");
+					//		$signup->bindParam(':username', $usrname);
+					//		$signup->bindParam(':firstname', $fname);
+					//		$signup->bindParam(':lastname', $lname);
+					//		$signup->bindParam(':pass_word', $passwd);
+					//		$signup->bindParam(':email_address', $email);
+					//		$signup->execute();
+					//	} catch (Exception $e) {
+					//		echo 'Error: ' . $e->getMessage();
+					//	}
 	
 						// $mysq = "INSERT INTO users(username, firstname, lastname, pass_word , email_address) VALUES (:username, :firstname, :lastname, :pass_word, :email_address)";
 						// $stmt = $connect->prepare($mysq);
@@ -111,35 +116,36 @@ try
 						// {
 						// 	echo $e;
 						// }
-					 var_dump($connect);
-						var_dump($stmt);
-						die();
-						if (mail($email, $email_cont, $content, $head))
-						{
-							echo 'Verification email successfully received';
-						} 
-						else 
-						{
-							echo 'There was an error, the email was not properly sent';
-						}
-					}
-					else 
-					{
-						echo 'Please add a valid email address';
-					}
+					// var_dump($connect);
+					//	var_dump($stmt);
+					//	die();
+					//	if (mail($email, $email_cont, $content, $head))
+					//	{
+					//		echo 'Verification email successfully received';
+					//	} 
+					//	else 
+					//	{
+					//		echo 'There was an error, the email was not properly sent';
+					//	}
+				//	}
+				//	else 
+				//	{
+				//		echo 'Please add a valid email address';
+					//}
 				}
 				else
 				{
 					echo 'please proceed';
 				}
 			}
+			else
+			{
+				echo 'Fill in all relevant fields';
+			}
 		}
-		else
-		{
-			echo 'Fill in all relevant fields';
-		}
-	}
-}	
+	}	
+}
+}
 catch(PDOException $e)
 {
 	echo $e;'Registration unsucessfull. Try again!!';
