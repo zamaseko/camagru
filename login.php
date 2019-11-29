@@ -1,64 +1,67 @@
 <html>
 <head>
-	<meta http-equiv="refresh" content="30">
-	<title>Camagru-login page</title>
-	<link rel="stylesheet" href="style.css">
+       <!-- <meta http-equiv="refresh" content="30">-->
+        <title>Camagru-login page</title>
+        <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="box">
-		<form action="login.php" method>	
-		<div>	
-			<h2 class="app-name">camagru<h2>
-			<input type="login.php"  method="POST"  placeholder="username"> <br>
-			<input type="password"  placeholder="password" > <br>
-			<input type="button" value="Login">
-		</div>
-		<div>
-			<a href="#" type="button">Sign Up</a><br><br>
-			<a href="#" type="button">Forgot Password?</a>
-		</div>
-		</form>
-	</div>
+        <div class="box">
+                <form action="login.php"  method="POST">
+                <div>
+                        <h2 class="app-name">camagru<h2>
+                        <input type="text"  method="POST" name="username" placeholder="username"> <br>
+                        <input type="password" name="pass_word" placeholder="password" > <br>
+                        <input type="submit" name="login" value="Login">
+                </div>
+                <div>
+                        <a href="#" type="button" >Sign Up</a><br><br>
+                        <a href="#" type="button">Forgot Password?</a>
+                </div>
+                </form>
+        </div>
 </body>
 </html>
 
 <?php
 
 include 'config/database.php';
-
+session_destroy();
+//$usrname = trim($_POST['username']);
+//$passwd = trim($_POST['pass_word']);
 $usrname = $_POST['username'];
-$passwd = $_POST['pass_word'];
+$passwd =md5($_POST['pass_word']);
 try
 {
 	$dsn = "mysql:host=$server;dbname=$db";
-	$connect = new pdo($dsn, $user, $password);
-	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	if (!empty($usrname) && !empty($passwd))
+ 	$connect = new PDO($dsn, $user, $password);
+ 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	if (!empty($usrname) && !empty($passwd))	
 	{
-		if (isset($usrname) && isset($passwd))
-		{	
-			$mysq = $connect->query('SELECT FROM users WHERE username = :username & :pass_word OR passwd = :pass_word');
-			$stmt = $connect->prepare($mysq);
-			$stmt->execute(['username' => $usrname, 'pass_word' => $passwd]);
-			$usr = $stmt->fetch(PDO::FETCH_ASSOC);
-			if($usrname == $usr[1])
+		if(isset($usrname) && isset($passwd))
+		{
+			//$mys = $connect->query("SELECT username, pass_word FROM users WHERE username = :username AND pass_word = :pass_word");
+			$mys= "SELECT * FROM users WHERE username = :username";
+			$stmt = $connect->prepare($mys);
+ 			//$mys = $connect->prepare("SELECT username, pass_word FROM users WHERE username = :username OR pass_word = :pass_word");
+ 			//$stmt = $connect->prepare($mys);
+ 			$stmt->bindValue(':username', $usrname);
+			//$stmt->bindValue(':pass_word', $passwd);
+		 	$stmt->execute(['username' => $usrname]);
+			$usr = $stmt->fetch();
+			if($usrname == $usr[1] && $passwd == $usr[4] && $usr[6] == 1)
 			{
-				if($passwd == $usr[4])
-				{
-					echo 'User is connected successfully';
-				}
-				if ($usr[6] == 0)
-					echo 'You are not a verified user. Please press the sign up and folloe the instructions given';
-				else if ($usr[6] == 1)
-					echo 'Welcome to Camagru. You have activated your account successfully';
+				$_SESSION['vkey'] = $usr[7];
+				header('Location: head.php');	
 			}
 			else 
-				echo 'congratulations'; 
+			{
+				echo 'Username and password combination do not match';
+			}
 		}
 	}
 }
 catch(PDOException $e)
 {
-	echo 'Your Username or Password is incorrect, please try entering them again';
+	echo $e;
 }
 ?>

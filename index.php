@@ -9,9 +9,7 @@
 <body>
     <h1 class="title">camagru</h1>
     <nav>
-        <>Home<>
-        <>Menu<>
-        <>Explore<>
+        <>Settings<>
     </nav>    
 </body>
 </html>

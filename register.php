@@ -1,7 +1,7 @@
 <?php
 
 include 'config/database.php';
-echo 'im hifh';
+
 
 if (isset($_GET['action']) == 'signup')
 {
@@ -36,7 +36,7 @@ if (isset($_GET['action']) == 'signup')
                 $smtp1->bindParam(':vkey', $vkey);
                 $smtp1->execute();
 
-                header('Location: login2.php');
+                header('Location: login.php');
 
             }
         }

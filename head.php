@@ -32,8 +32,10 @@ body
 
 <?php
 include 'database.php';
-$usrname = $_GET['u'];
 
+session_start();
+$usr = $_SESSION['vkey'];
+echo $usr;
 if($usr)
 {
 	$connect = new PDO($dsn, $usr, $passwd);
