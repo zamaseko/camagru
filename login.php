@@ -14,8 +14,8 @@
                         <input type="submit" name="login" value="Login">
                 </div>
                 <div>
-                        <a href="#" type="button" >Sign Up</a><br><br>
-                        <a href="#" type="button">Forgot Password?</a>
+                        <a href="signup.php" type="button" >Sign Up</a><br><br>
+                        <a href="forgotpwd.php" type="button">Forgot Password?</a>
                 </div>
                 </form>
         </div>

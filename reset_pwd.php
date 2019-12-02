@@ -15,6 +15,7 @@ if (isset($_GET["q"])) {
 
 
 <?php
+include_once 'config/database.php';
 try
 {
 	$dsn = "mysql;host=$server;dbname=$db";

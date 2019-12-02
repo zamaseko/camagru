@@ -20,15 +20,15 @@ body
 <div>
 	<h1 class="title">camagru<h1>
 	<nav class="navigation">
-		<a href="index.php?usr=<?php echo $usr?>">Home</a>
-		<a href="explore.php?usr=<?php echo $usr?>">Explore</a>
-		<a href="search.php?usr=<?php echo $usr?>">Search</a>
-		<a href="profile.php?usr=<?php echo $usr?>">Profile</a>
+		<a href="index.php">Home</a>
+		<a href="explore.php">Explore</a>
+		<a href="search.php">Search</a>
+		<a href="profile.php>">Profile</a>
 	</nav>	
 </div>
-	<button type="button" action="login2.php">LogOut</button>
+	<button type="button" action="login.php">LogOut</button>
 </body>
-</html
+</html>
 
 <?php
 include 'database.php';
