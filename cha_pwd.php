@@ -12,6 +12,7 @@
 </html>
 
 <?php
+include '/config/database.php';
 try
 {
 	$email = trim($_GET['ea']);

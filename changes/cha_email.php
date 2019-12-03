@@ -7,47 +7,43 @@
 </html>
 
 <?php
+include 'config/database.php';
 
-include_once '../config/database.php';
-
-$pre_e = $_POST['pre_e'];
+$eml = $_POST['pre_e'];
 $new_e = $_POST['new_e'];
-
 try
 {
     $dsn = "mysql:host=$server;dbname=$db";
     $connect = new PDO($dsn, $user, $password);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    if(!empty($pre_e) && !empty($new_e))
+	if(!empty($eml) && !empty($new_e))
     {
-        if(isset($pre_e) )//&& isset($new_e))
+        if(isset($eml) && isset($new_e))
         {
-			
-		    $stmt = $connect->prepare('SELECT * FROM users WHERE email_address = :email_address');
+		    $stmt = $connect->prepare("SELECT * FROM users WHERE email_address = :email_address");
     		//$stmt = $connect->prepare('SELECT username, email_address FROM users WHERE username =:username AND email_address = :email_address');
-            $stmt->bindValue(':email_address', $pre_e);
+            $stmt->bindValue(':email_address', $new_e);
           // $stmt->bindValue('username', $usrname);
-           $stmt->execute(['email_address' => $pre_e]);
+           $stmt->execute(['email_address' => $new_e]);
            //  $stmt->execute(['username' => $us])
     		$usr = $stmt->fetch();
-            if($pre_e)
+            if($new_e)
 		    {
-				
-				if ($usr[5] == $pre_e)
+                if ($usr[5] != $new_e)
                 {
-                    $email_cont = "Camagru change username";
+                    $email_cont = "Camagru change Email";
       		    	$head = "From noreply@camagruteam.co.za" . "\r\n";
 	        		$head .= 'MIME-Version: 1.0' . "\r\n";
 	    	    	$head .= 'Content-type:text/html charset=iso-8859-1<br><br>';
-                    $content = "Hey $fname $lname. <br> We have noticed that you requested to change you username <br>
-                       $usrname <br><br>
-		    			In order to change your username please click the link below <br><br>
-	    				<a href='http://localhost:8080/camagru/changes/update_username.php?action=change_u&email=$pre_e&new=$new_e'>Change username</a> <br><br>
-                        From: The Camagru team";
+                    $content = "Hey $fname $lname. <br> We have noticed that you requested to change your Email Address <br>
+                    	   $usrname <br><br>
+		    				In order to change your email please click the link below <br><br>
+	    					<a href='http://localhost:8080/camagru/changes/update_email.php?email=$eml&new=$new_e'>Change Email Address</a> <br><br>
+                    	    From: The Camagru team";
                         				
-			        if(mail($pre_e, $email_cont, $content, $head))
+			        if(mail($eml, $email_cont, $content, $head))
 		        	{
-    			    	echo 'Email change request sent to your email address.';
+    			    	echo 'Username change request sent to your email address.';
 	    		    }
 		    	    else
 			        {

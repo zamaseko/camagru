@@ -26,15 +26,15 @@ if (isset($_GET['action']) == 'signup')
             else
             {
                 
-                $smtp = $connect->prepare("UPDATE users SET verified = '1' WHERE email_address =:email_address AND vkey =:vkey");
-                $smtp->bindParam(':email_address', $email);
-                $smtp->bindParam(':vkey', $vkey);
-                $smtp->execute();
+                $stmt = $connect->prepare("UPDATE users SET verified = '1' WHERE email_address =:email_address AND vkey =:vkey");
+                $stmt->bindParam(':email_address', $email);
+                $stmt->bindParam(':vkey', $vkey);
+                $stmt->execute();
               
-                $smtp1 = $connect->prepare("UPDATE users SET vkey =:vkey WHERE email_address =:email_address");
-                $smtp1->bindParam(':email_address', $email);
-                $smtp1->bindParam(':vkey', $vkey);
-                $smtp1->execute();
+                $stmt1 = $connect->prepare("UPDATE users SET vkey =:vkey WHERE email_address =:email_address");
+                $stmt1->bindParam(':email_address', $email);
+				$stmt1->bindParam(':vkey', $vkey);
+                $stmt1->execute();
 
                 header('Location: login.php');
 

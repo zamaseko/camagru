@@ -42,7 +42,7 @@ try
                     $content = "Hey $fname $lname. <br> We have noticed that you requested to change you username <br>
                        $usrname <br><br>
 		    			In order to change your username please click the link below <br><br>
-	    				<a href='http://localhost:8080/camagru/changes/update_username.php?action=change_u&email=$eml&usr=$usrn'>Change username</a> <br><br>
+	    				<a href='http://localhost:8080/camagru/changes/update_username.php?email=$eml&usr=$usrn'>Change username</a> <br><br>
                         From: The Camagru team";
                         				
 			        if(mail($eml, $email_cont, $content, $head))
