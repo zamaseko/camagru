@@ -19,6 +19,8 @@ try
 	$cpwd2 = trim($_POST['p2']);
 	if(!empty($cpwd))
 	{
+		echo 'hello';
+		die();
 		if(isset($cpwd) && isset($cpwd2))
 		{
 			if($cpwd == $cpwd2)
