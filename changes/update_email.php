@@ -5,13 +5,14 @@ try
 {
     $em = $_GET['email'];
     $ne = $_GET['new'];
+    $usrn = $_GET['usr'];
     $dsn = "mysql:host=$server;dbname=$db";
     $connect = new PDO($dsn, $user, $password);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $connect->prepare("UPDATE users SET  email_address =:email_address WHERE email_address =:email_address");
+    $stmt = $connect->prepare("UPDATE users SET  email_address =:email_address WHERE username =:username");
     //$stmt->bindParam('username', $nus);
-   // $stmt->bindParam('email_address', $em);
-    $stmt->execute(['email_address' => $ne , 'email_address' => $em]);
+    $stmt->bindParam('email_address', $ne);
+    $stmt->execute(['username' => $usrn , 'email_address' => $ne]);
     //$usr = $stmt->fetch();
     if($usr[5] == $$ne)
     {

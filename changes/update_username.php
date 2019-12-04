@@ -19,7 +19,7 @@ try
     }
     else 
     {
-        echo 'Usename update not successful';
+        echo 'Username update not successful';
     }
 }
 catch(PDOException $e)

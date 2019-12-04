@@ -1,4 +1,7 @@
 <html>
+<head>
+	<link rel="stylesheet" href="../style.css"> 
+</head>
 	<form action="cha_usr.php" method="POST"><br>
 		Enter Current email:<br><input type="email" name="u_e" required><br><br>
 		Desired New Username:<br><input type="text" name="uname" required><br><br>
