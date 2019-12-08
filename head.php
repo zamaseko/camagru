@@ -3,17 +3,22 @@
 <style>	
 body
 {
-	background-color: grey;
+	background-color:lightsalmon;
 }
 
 .navigation{
 	background-color: white;
+	
 }
 .title{
     font-style: oblique;
     font-size: 100px;
     color: black;
 	text-align: center;
+}
+.settings{
+	font-size: 15px;
+	padding-right: 3px;
 }
 </style>
 <body>
@@ -23,30 +28,15 @@ body
 		<a href="index.php">Home</a>
 		<a href="explore.php">Explore</a>
 		<a href="search.php">Search</a>
-		<a href="profile.php>">Profile</a>
-	</nav>	
+		<a href="profile.php">Profile</a>
+	</nav>
+	<a class="settings" href="settings.php?usr=">Settings</a>
 </div>
-	<button type="button" action="login.php">LogOut</button>
+	<a href="Logout.php" type="button">Logout</a>
 </body>
 </html>
 
 <?php
-include 'database.php';
-
 session_start();
-$usr = $_SESSION['vkey'];
-echo $usr;
-if($usr)
-{
-	$connect = new PDO($dsn, $usr, $passwd);
-	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$stmt = $connect->prepare();
-	$stmt->execute();
-	$usr = $stmt->fetc();
-}
-// //else
-// {
-// 	header('Location:login.php');
-// }
 ?>
 

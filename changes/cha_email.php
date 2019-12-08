@@ -28,12 +28,9 @@ try
         if(isset($eml) && isset($neml) && isset($usrn))
         {
 		    $stmt = $connect->prepare('SELECT * FROM users WHERE username = :username');
-    		//$stmt = $connect->prepare('SELECT username, email_address FROM users WHERE username =:username AND email_address = :email_address');
-            //$stmt->bindValue(':email_address', $eml);
-          	$stmt->bindValue('username', $usrn);
-           $stmt->execute(['username' => $usrn]);
-           //  $stmt->execute(['username' => $us])
-    		$usr = $stmt->fetch();
+    		$stmt->bindValue('username', $usrn);
+            $stmt->execute(['username' => $usrn]);
+           	$usr = $stmt->fetch();
             if($eml && $usrn)
 		    {
                 if ($usr[5] != $neml)

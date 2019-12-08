@@ -28,11 +28,8 @@ try
         if(isset($eml) && isset($usrn))
         {
 		    $stmt = $connect->prepare('SELECT * FROM users WHERE email_address = :email_address');
-    		//$stmt = $connect->prepare('SELECT username, email_address FROM users WHERE username =:username AND email_address = :email_address');
             $stmt->bindValue(':email_address', $eml);
-          // $stmt->bindValue('username', $usrname);
-           $stmt->execute(['email_address' => $eml]);
-           //  $stmt->execute(['username' => $us])
+            $stmt->execute(['email_address' => $eml]);
     		$usr = $stmt->fetch();
             if($eml)
 		    {

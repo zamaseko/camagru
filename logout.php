@@ -1,14 +1,8 @@
 <?php
+$usr_s = $_GET['usr'];
+$session = $_SESSION['usr'];
 session_start();
-?>
-<!DOCTYPE html>
-<html>
-<body>
-
-<?php
-// remove all session variables
-session_unset();
-
-// destroy the session
+session_unset($session);
 session_destroy();
+header("Location: login.php");
 ?>

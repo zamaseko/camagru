@@ -10,11 +10,9 @@ try
     $connect = new PDO($dsn, $user, $password);
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $connect->prepare("UPDATE users SET  pass_word =:pass_word WHERE email_address =:email_address");
-    //$stmt->bindParam('username', $nus);
     $stmt->bindParam('pass_word', md5($npwd));
     $stmt->execute(['pass_word' => $npwd , 'email_address' => $em]);
-    //$usr = $stmt->fetch();
-    if($usr[4] == $npwd)
+    if($usr[4] == $opwd)
     {
         echo 'Password has successfully been updated';
     }
@@ -27,6 +25,5 @@ catch(PDOException $e)
 {
     echo $e;
 }
-
 
 ?>

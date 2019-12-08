@@ -1,4 +1,7 @@
 <html>
+<head>
+	<link rel="stylesheet" href="style.css"> 
+</head>
 	<form action="forgotpwd.php" method="POST"><br>
 		Enter Current email:<br><input type="email" name="e" required><br><br>
 		<input type="submit" name= "email_address" value="submit"><br><br>
@@ -20,7 +23,6 @@ try
 	{	
 		if(isset($email))
 		{
-			//$mys = $connect->query('SELECT email_address FROM users WHERE email_address = :email_address');
 			$stmt = $connect->prepare('SELECT * FROM users WHERE email_address =:email_address');
 			$stmt->bindValue('email_address', $email);
 			$stmt->execute(['email_address' => $email]);
@@ -33,7 +35,7 @@ try
 				$head .= 'Content-type:text/html charset=iso-8859-1<br><br>';
 				$content = "Hey $fname $lname. <br> We have noticed that you have forgoten your password. <br>
 						to enter a new password Please click the link below <br><br>
-						<a href='http://localhost:8080/camagru/cpwd.php?action=reset&email=$email'>Change password</a> <br><br>
+						<a href='http://localhost:8080/camagru/reset_pwd.php?action=reset&email=$email'>Change password</a> <br><br>
 						From: The Camagru team";
 				
 				if(mail($email, $email_cont, $content, $head))

@@ -1,6 +1,5 @@
 <html>
 <head>
-       <!-- <meta http-equiv="refresh" content="30">-->
         <title>Camagru-login page</title>
         <link rel="stylesheet" href="style.css">
 </head>
@@ -26,8 +25,7 @@
 
 include 'config/database.php';
 session_destroy();
-//$usrname = trim($_POST['username']);
-//$passwd = trim($_POST['pass_word']);
+
 $usrname = $_POST['username'];
 $passwd =md5($_POST['pass_word']);
 try
@@ -39,25 +37,29 @@ try
 	{
 		if(isset($usrname) && isset($passwd))
 		{
-			//$mys = $connect->query("SELECT username, pass_word FROM users WHERE username = :username AND pass_word = :pass_word");
 			$mys= "SELECT * FROM users WHERE username = :username";
 			$stmt = $connect->prepare($mys);
- 			//$mys = $connect->prepare("SELECT username, pass_word FROM users WHERE username = :username OR pass_word = :pass_word");
- 			//$stmt = $connect->prepare($mys);
  			$stmt->bindValue(':username', $usrname);
-			//$stmt->bindValue(':pass_word', $passwd);
 		 	$stmt->execute(['username' => $usrname]);
 			$usr = $stmt->fetch();
 			if($usrname == $usr[1] && $passwd == $usr[4] && $usr[6] == 1)
 			{
 				$_SESSION['vkey'] = $usr[7];
-				header('Location: head.php');	
+				header("Location: head.php?usr=$usr[1]");	
 			}
 			else 
 			{
 				echo 'Username and password combination do not match';
 			}
 		}
+		else
+		{
+			echo 'User may not be verified';
+		}
+	}
+	else
+	{
+		echo 'Please fill in the fields';
 	}
 }
 catch(PDOException $e)

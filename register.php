@@ -21,7 +21,7 @@ if (isset($_GET['action']) == 'signup')
             $usr = $mys->fetch(PDO::FETCH_ASSOC);
             if ($usr === false)
             {
-                echo "<b>Error: Could not verify the account/ email address already taken</b>";
+                echo "<b>Error: Could not verify the account/ email address or username is already taken</b>";
             }	
             else
             {

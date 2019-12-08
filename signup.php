@@ -13,16 +13,13 @@
 		Password:<br><input type="password" name="p1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
 		Re-enter Password: <br><input type="password" name="p2" required><br>
 		<input type="submit" value="Register" >
-<!--/div-->
+
 </form>
 </html>
 
 <?php
 include "./config/database.php";
-//$server = 'localhost';
-//$user = 'root';
-//$db = 'camagru_db';
-//$password = 'zandilem';
+
 $usrname = $_POST['u'];
 $passwd = trim($_POST['p1']);
 $passwd2 = trim($_POST['p2']);
@@ -67,8 +64,8 @@ try
 						<a href='http://localhost:8080/camagru/register.php?action=signup&email=$email&vk=$vkey'>Click me </a><br><br>
 						The Camagru team";
 
-						try {
-							//$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word, email_address, vkey)VALUES (?, ?, ?, ?, ?, ?)");
+						try 
+						{
 							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address, vkey) VALUES (:username, :firstname, :lastname, :pass_word, :email_address, :vkey)");
 							$signup->bindParam(':username', $usrname);
 							$signup->bindParam(':firstname', $fname);
@@ -96,44 +93,7 @@ try
 						{
 							echo 'There was an error saving user to the database';
 						}
-						 //$connect = new PDO($dsn, $user, $password );
-					//	try {
-					//		$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address)VALUES (:username, :firstname, :lastname, :pass_word, :email_address)");
-					//		$signup->bindParam(':username', $usrname);
-					//		$signup->bindParam(':firstname', $fname);
-					//		$signup->bindParam(':lastname', $lname);
-					//		$signup->bindParam(':pass_word', $passwd);
-					//		$signup->bindParam(':email_address', $email);
-					//		$signup->execute();
-					//	} catch (Exception $e) {
-					//		echo 'Error: ' . $e->getMessage();
-					//	}
-
-						// $mysq = "INSERT INTO users(username, firstname, lastname, pass_word , email_address) VALUES (:username, :firstname, :lastname, :pass_word, :email_address)";
-						// $stmt = $connect->prepare($mysq);
-						// try {
-						// 	$stmt->execute([$usrname, $fname,$lname, $passwd, $email]);
-						// } catch(PDOException $e)
-						// {
-						// 	echo $e;
-						// }
-					// var_dump($connect);
-					//	var_dump($stmt);
-					//	die();
-					//	if (mail($email, $email_cont, $content, $head))
-					//	{
-					//		echo 'Verification email successfully received';
-					//	}
-					//	else
-					//	{
-					//		echo 'There was an error, the email was not properly sent';
-					//	}
-				//	}
-				//	else
-				//	{
-				//		echo 'Please add a valid email address';
-					//}
-				}
+					}
 				else
 				{
 					echo 'please proceed';

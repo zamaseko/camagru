@@ -7,20 +7,14 @@
 
 </style>
 <nav class="navbar">
-			<p>Settings</p>
-			<ul>
-				<li><a href="#">Menu</a>
-					<ul>
-						<li><a href="cha_pwd.php">Update Password</a><li>
-						<li><a href="cha_email.php">Update Email</a><li>
-						<li><a href="cha_usrname.php">Update Username</a><li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
+			
 </nav>
 </html>
 
 <?php
+include 'config/database.php';
 
+$dsn = "mysql:host=$server;dbname=$db";
+$connect = new PDO($dsn, $user, $password);
+$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 ?>
