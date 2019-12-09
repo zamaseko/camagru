@@ -36,7 +36,7 @@ if (isset($_GET['action']) == 'signup')
 				$stmt1->bindParam(':vkey', $vkey);
                 $stmt1->execute();
 
-                header('Location: login.php');
+                header('Location:index.php');
 
             }
         }

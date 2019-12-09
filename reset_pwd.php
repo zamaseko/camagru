@@ -4,8 +4,8 @@
 </head>
         <form action="reset_pwd.php" method="POST"><br>
                 Enter Current email:<br><input type="email" name="u_e" required><br>
-                New Password: <br><input type="password" name="pwd" required><br><br>
-                <input type="submit"  value="submit"><br><br>
+                New Password:<br><input type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
+				<input type="submit"  value="submit"><br><br>
         <form>
 </html>
 
