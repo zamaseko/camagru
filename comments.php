@@ -24,17 +24,18 @@ try
 			$stmt1 = $connect->prepare("SELECT * FROM user WHERE username = :username");
 			$stmt1->execute();
 			$usr = $stmt1->fetch();
-			if($usr[])
+			if($usr[1])
 			{
-				insert email message;
-				if(mail(.,.,.,.))
-				{
-					echo ' ';
-				}
-				else 
-				{
-					echo '';
-				}
+				echo 'im alive';
+				die();
+				//if(mail(.,.,.,.))
+				// {
+				// 	echo ' ';
+				// }
+				// else 
+				// {
+				// 	echo '';
+				// }
 			}
 			else 
 			{
