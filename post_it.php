@@ -1,3 +1,5 @@
+<?php include "head.php"; ?>
+
 <html>
     <form action='post_it.php' method="POST" enctype="multipart/form-data">
 	<textarea name="caption" rows="5" cols="60"></textarea><br>
@@ -27,7 +29,7 @@ if($e_check)
 	{
 		if (isset($name))
 		{
-			$locate = $path.$name_uni;
+			$locate = $path. $name_uni;
 			$date = date("d-m-Y H:i:s");
 			$filter = "none";
 			if (move_uploaded_file($temp_name, $locate))
@@ -35,7 +37,7 @@ if($e_check)
 				$dsn = "mysql:host=$server;dbname=$db";
 				$connect = new PDO($dsn, $user, $password);
 				$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$mys = $connect->prepare("INSERT INTO media(media_cap, media_date, media_path, fil_media VALUES (:mediai_cap, :media_date, :media_path, :fil_media)");
+				$mys = $connect->prepare("INSERT INTO media(media_cap, media_date, media_path, fil_media VALUES (:media_cap, :media_date, :media_path, :fil_media)");
 				$connect->execute();
 
 				header("Location: profile.php?usr=$cusr");

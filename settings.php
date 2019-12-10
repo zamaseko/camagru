@@ -1,13 +1,14 @@
 <?php 
-
-$use = $_GET['usr']; 
 include "head.php";
+$use = $_GET['usr']; 
+
 ?>
+
 <html>
 <style>
 	.navbar
 	{
-		background-color: 'bright blue';
+		background-color: #bab86c;
 	}
 	a.decor{
 		text-decoration: none;

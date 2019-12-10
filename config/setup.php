@@ -2,9 +2,9 @@
 
 include 'database.php';
 
-$server = 'localhost';
-$user = 'root';
-$password = 'zandilem';
+//$server = 'localhost';
+//$user = 'root';
+//$password = 'zandilem';
 $dsns = "mysql:host=$server";
 try
 {
@@ -23,7 +23,7 @@ try
 		  	email_address varchar(255)  NOT NULL UNIQUE KEY, 
 			verified int(1) NOT NULL DEFAULT 0,
 			vkey varchar(255) NOT NULL,
-			notif int(1) NOT NULL DEFAULT 0
+			notif int(1) NOT NULL DEFAULT 1
 			)";
 			$connect->exec($sql1);
 			echo "Users table created successfully<br>";

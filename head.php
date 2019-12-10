@@ -1,6 +1,6 @@
 <?php
 include '/config/database.php';
-$use = $_GET['usr'];
+//$use = $_GET['usr'];
 
 if ($use)
 {
@@ -41,11 +41,14 @@ if ($use)
 	</style>
 <body>
 <div>
+	<a class="logout" href="Logout.php" type="button">Logout</a>
+</div>
+<div>
 	<h1 class="title">camagru<h1>
 	<nav class="navigation">
-		<a href="index.php">Home &emsp;&emsp;&emsp;</a>
-		<a href="explore.php">Explore &emsp;&emsp;&emsp;</a>
-		<a href="search.php">Search &emsp;&emsp;&emsp;</a>
+		<!--a href="index.php">Home &emsp;&emsp;&emsp;&emsp;</a-->
+		<a href="explore.php">Explore &emsp;&emsp;&emsp;&emsp;</a>
+		<a href="search.php">Search &emsp;&emsp;&emsp;&emsp;</a>
 		<a href="profile.php">Profile</a>
 	</nav>
 </div>

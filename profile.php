@@ -1,3 +1,8 @@
+<?php
+ include "head.php";
+ $use = $_GET['usr'];
+
+ ?>
 <html>
 <style>
 	a.logout{
@@ -20,15 +25,18 @@ a.buy:hover
 
 </style>
 <body>
+    <div>
+	<a class="settings" href="settings.php?usr=$use">Settings</a> <br>
+	<!--a class="logout" href="Logout.php" type="button">Logout</a-->
+    </div>
+    <div>
 
-	<a class="settings" href="settings.php?usr=">Settings</a> <br>
-</div>
-	<a class="logout" href="Logout.php" type="button">Logout</a>
+    </div>
 </body>
 </html>
 
 <?php
- include "head.php";
+
 include 'config/database.php';
 
 $dsn = "mysql:host=$server;dbname=$db";
