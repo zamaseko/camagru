@@ -1,6 +1,6 @@
 <?php 
 include "head.php";
-$use = $_GET['usr']; 
+$use = $_SESSION['vkey']; 
 
 ?>
 

@@ -1,21 +1,27 @@
 <?php
-include '/config/database.php';
-//$use = $_GET['usr'];
+session_start();
+$use = $_SESSION['vkey'];
+//echo $use;
+//die();
+include 'config/database.php';
 
 if ($use)
 {
-	//include '/config/database.php';
 	$dsn = "mysql:host=$server;dbname=$db";
 	$connect = new PDO($dsn, $user, $password);
-	$mys = $connect->prepare("SELECT * FROM users WHERE username = :username");
+	$stmt = $connect->prepare("SELECT * FROM users WHERE vkey = :vkey");
 	//$stmt = $connect->prepare($mys);
-	$stmt->bindParam(':username', $use);
-	$stmt->execute(['username' => $use]);
+	$stmt->bindParam(':vkey', $use);
+	$stmt->execute(['vkey' => $use]);
 	$usr = $stmt->fetch();
+	
 }
-
+else
+{
+	header("Location: index.php");
+}
 ?>
-<html>
+<!<html>
 	<style>	
 	body
 	{
@@ -28,6 +34,13 @@ if ($use)
 	.navigation a{
 		text-decoration: none;
 	}
+	a.logout{
+	color: blue;
+    font-size: medium;
+    text-decoration: none;
+    float: right;
+	}
+
 	.title{
     	font-style: oblique;
     	font-size: 100px;
@@ -46,7 +59,7 @@ if ($use)
 <div>
 	<h1 class="title">camagru<h1>
 	<nav class="navigation">
-		<!--a href="index.php">Home &emsp;&emsp;&emsp;&emsp;</a-->
+		<!--a href="index.php">Home &emsp;&emsp;&emsp;&emsp;</a>-->
 		<a href="explore.php">Explore &emsp;&emsp;&emsp;&emsp;</a>
 		<a href="search.php">Search &emsp;&emsp;&emsp;&emsp;</a>
 		<a href="profile.php">Profile</a>

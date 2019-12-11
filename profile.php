@@ -1,6 +1,6 @@
 <?php
  include "head.php";
- $use = $_GET['usr'];
+ $use = $_SESSION['vkey'];
 
  ?>
 <html>
@@ -30,7 +30,7 @@ a.buy:hover
 	<!--a class="logout" href="Logout.php" type="button">Logout</a-->
     </div>
     <div>
-
+        <a class="post" href="post_it.php?usr=$use">Post</a>   
     </div>
 </body>
 </html>

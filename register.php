@@ -2,7 +2,6 @@
 
 include 'config/database.php';
 
-
 if (isset($_GET['action']) == 'signup')
 {
     if (isset($_GET['email']) && isset($_GET['vk']))
@@ -51,5 +50,3 @@ if (isset($_GET['action']) == 'signup')
     }
 }
 ?>
-
-
