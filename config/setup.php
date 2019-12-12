@@ -30,10 +30,10 @@ try
 			
 			$sql2 = "CREATE TABLE camagru_db.media (
 			media_id int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-			media_cap text NOT NULL , 
+			o_vkey varchar(255) NOT NULL , 
 		  	media_date datetime NOT NULL , 
-		  	media_path text NOT NULL , 
-			fil_media varchar(255) NOT NULL
+		  	media_path text NOT NULL ,
+			med_like int NOT NULL DEFAULT 0
 			)";  
 			$connect->exec($sql2);
 	echo "Media table created successfully<br>";

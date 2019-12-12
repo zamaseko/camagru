@@ -1,7 +1,7 @@
 <?php 
-
+session_start();
 $use = $_SESSION['vkey'];
-include_once("config/database.php");
+include "config/database.php";
 // $not = 1;
 try
 {
@@ -10,8 +10,6 @@ try
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if(isset($use))
     {
-        var_dump();
-        die();
         $stmt = $connect->prepare("SELECT * FROM users WHERE vkey = :vkey");
         $stmt->bindValue(':vkey', $use);
         $stmt->execute();
@@ -22,6 +20,7 @@ try
             $stmt->bindParam(':vkey', $use);
             //$stmt->bindParam(':vkey', $vkey);
             $stmt->execute();
+            header("Location: notif.php");
         }
         else
         {

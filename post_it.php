@@ -1,10 +1,14 @@
-<?php include "head.php"; ?>
+<?php 
+session_start();
+include "head.php"; 
+?>
 
 <html>
     <form action='post_it.php' method="POST" enctype="multipart/form-data">
 	<textarea name="caption" rows="5" cols="60"></textarea><br>
 		<input type="file" name="file">
         <input type="submit" value="upload">
+	</form>
 </html>
 <?php
 

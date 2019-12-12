@@ -24,7 +24,7 @@
 <?php
 
 include 'config/database.php';
-//session_destroy();
+session_destroy();
 
 $usrname = $_POST['username'];
 $passwd =md5($_POST['pass_word']);

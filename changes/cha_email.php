@@ -1,9 +1,10 @@
+<?php include '../head.php' ?>
 <html>
 <head>
 	<link rel="stylesheet" href="../style.css"> 
 </head>
 	<form action="cha_email.php" method="POST"><br>
-		Enter current Username:<br><input type="text" name="username" required><br><br>
+		Enter current email address:<br><input type="text" name="username" required><br><br>
 		Enter Current email:<br><input type="email" name="pre_e" required><br><br>
 		Enter New Desired Eamil: <br><input type="email" name="new_e"required><br><br>
 		<input type="submit" name="email_address" value="submit"><br><br>
@@ -11,7 +12,7 @@
 </html>
 
 <?php
-include_once '../head.php';
+;
 
 
 $eml = $_POST['pre_e'];
