@@ -29,6 +29,8 @@ $path = "camagru/media/";
 $e_check = in_array($e, $exten);
 if($e_check)
 {
+	echo 'hello';
+	die();
 	if (!empty($name))
 	{
 		if (isset($name))
@@ -41,10 +43,10 @@ if($e_check)
 				$dsn = "mysql:host=$server;dbname=$db";
 				$connect = new PDO($dsn, $user, $password);
 				$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$mys = $connect->prepare("INSERT INTO media(media_cap, media_date, media_path, fil_media VALUES (:media_cap, :media_date, :media_path, :fil_media)");
+				$mys = $connect->prepare("INSERT INTO media(o_key, media_date, media_path VALUES (:o_key, :media_date, :media_path)");
 				$connect->execute();
 
-				header("Location: profile.php?usr=$cusr");
+				//header("Location: profile.php?usr=$cusr");
 			}
 			else
 			{

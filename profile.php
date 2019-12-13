@@ -1,7 +1,7 @@
 <?php
  include "head.php";
- session_start();
- $use = $_SESSION['vkey'];
+ //session_start();
+ //$use = $_SESSION['vkey'];
  ?>
 <html>
 <style>
@@ -42,7 +42,7 @@ a.buy:hover
     </div>
     <div class="posted">
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
-        <a class="post" href="post_it.php?usr=$use">Post</a>   
+        <a class="post" href="post_itt.php">Post</a>   
     </div>
 </div>
 </body>

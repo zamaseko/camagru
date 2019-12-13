@@ -10,8 +10,8 @@ session_start();
     </style>
     <body>
     <p class="notif"> Do you want to recieve your notifications? </p> 
-        <button type=”checkbox” onclick = "on()" name=”affirmative” value=”yes” checked>Yes</button>
-        <button type=”checkbox” onclick = "off()" name=”negative” value=”no”>No</button>
+        <button type=”button” onclick = "on()" name=”affirmative” value=”yes” checked>Yes</button>
+        <button type=”button” onclick = "off()" name=”negative” value=”no”>No</button>
     </body>
     <script>
     function on()
