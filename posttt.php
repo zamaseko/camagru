@@ -19,8 +19,6 @@ if (isset($use))
     if(!empty($_POST['posted']) )
     {
 
-        echo("hello");
-        die();
     $name = $_FILE['file']['name'];
     $temp_name = $_FILE['file']['temp_name'];
     $cap = $_POST['caption'];

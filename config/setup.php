@@ -33,6 +33,7 @@ try
 			o_vkey varchar(255) NOT NULL , 
 		  	media_date datetime NOT NULL , 
 		  	media_path text NOT NULL ,
+			caption text NULL , 
 			med_like int NOT NULL DEFAULT 0
 			)";  
 			$connect->exec($sql2);

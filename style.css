@@ -49,3 +49,9 @@ form input
 	border-style: outset;
 	padding-block: inherit; 
 }
+
+.caption_text{
+	font-weight: bold;
+	padding: 6px;
+	font-size: 16px;
+}

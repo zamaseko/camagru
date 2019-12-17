@@ -1,7 +1,7 @@
 <?php
  include "head.php";
- //session_start();
- //$use = $_SESSION['vkey'];
+ session_start();
+ $use = $_SESSION['vkey'];
  ?>
 <html>
 <style>
@@ -28,7 +28,12 @@ a.buy:hover
 .inrow
 			{
 				display: flex;
-			}
+            }
+.caption_text{
+	font-weight: bold;
+	padding: 6px;
+	font-size: 16px;
+}
 </style>
 <body>
     <div>
@@ -42,17 +47,42 @@ a.buy:hover
     </div>
     <div class="posted">
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
-        <a class="post" href="post_itt.php">Post</a>   
+        <a class="post" href="post_it.php">Post</a>   
+    </div>
+
+    <div>
+    <br/>        
+    <?php
+        include 'config/database.php';
+        try{
+            $dsn = "mysql:host=$server;dbname=$db";
+            $connect = new PDO($dsn, $user, $password);
+            $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $connect->prepare("SELECT u.vkey, m.o_vkey, m.media_path, m.media_id, m.caption, m.media_date FROM users u, media m WHERE u.vkey = m.o_vkey ORDER BY media_date DESC");
+            $stmt->execute();
+            if ($stmt === false)
+            {
+                echo 'No Posts Yet';
+            }else{
+                foreach ($stmt as $row) {
+                    echo "<img src='".$row['media_path']."' width='250px' height='250px' alt='Posts' class='image'>";
+                    echo    "<div class='overlay'>";
+                    echo        "<div class='caption_text'>".$row['caption']."</div>";
+                    echo        "<a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a>";
+                    echo    "</div>";
+                    echo "</div>";
+                    
+                }
+            }
+            
+        }catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+        ?>
     </div>
 </div>
+
 </body>
 </html>
 
-<?php
-
-include 'config/database.php';
-
-$dsn = "mysql:host=$server;dbname=$db";
-$connect = new PDO($dsn, $user, $password);
-$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-?>
