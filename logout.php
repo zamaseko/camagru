@@ -1,7 +1,6 @@
 <?php
-$usr_s = $_GET['usr'];
-$session = $_SESSION['usr'];
 session_start();
-session_unset($session);
+session_unset();
+session_destroy();
 header("Location: index.php");
 ?>

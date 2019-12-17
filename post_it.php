@@ -1,6 +1,10 @@
 <?php 
 session_start();
 include "head.php"; 
+if(!isset($_SESSION['vkey']))
+{
+	header('Location: index.php');
+}
 ?>
 
 <html>

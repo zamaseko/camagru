@@ -45,6 +45,13 @@ a.buy:hover
             try{
                 $image_id = $_GET['id'];
                 echo $use;
+
+                $smtp = $connect->prepare("DELETE FROM media WHERE media . media_id = $image_id");
+                if($smtp ->execute())
+                {
+                    echo '<script language="javascript">alert("Image Deleted")</script>';
+                    header("refresh:0.5; url=profile.php");
+                }
             }catch(PDOException $e)
             {
                 echo $e->getMessage();
