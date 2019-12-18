@@ -31,7 +31,7 @@ try
 			$sql2 = "CREATE TABLE camagru_db.media (
 			media_id int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 			o_vkey varchar(255) NOT NULL , 
-		  	media_date datetime NOT NULL , 
+		  	media_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 		  	media_path text NOT NULL ,
 			caption text NULL , 
 			med_like int NOT NULL DEFAULT 0
@@ -42,7 +42,7 @@ try
 		$sql3 = "CREATE TABLE camagru_db.likes (
 			like_id text NOT NULL ,
 		  	like_media int NOT NULL DEFAULT 0 , 
-			like_path text NOT NULL
+			like_user text NOT NULL 
 				)"; 
 			$connect->exec($sql3); 
 			echo "Likes table created successfully<br>";
@@ -51,16 +51,16 @@ try
 			comment_owner text NOT NULL, 
 		  	comment_media text NOT NULL ,
 			comment text NOT NULL,
-			com_date datetime
+			com_date datetime DEFAULT CURRENT_TIMESTAMP
 			)";
 			$connect->exec($sql4);
 			echo "Comments table created successfully<br>";
 }
 catch(PDOException $e)
 {
-	echo 'Users table not created successfully';
+	echo $e;'Users table not created successfully';
 }
 
-$connect = null;
+
 ?>
 

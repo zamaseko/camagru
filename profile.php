@@ -53,6 +53,8 @@ a.buy:hover
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
         <a class="post" href="post_it.php">Post</a>   
     </div>
+    <div>
+    <a href="comment.php">comment</a>
 
     <div>
     <br/>        
@@ -72,7 +74,7 @@ a.buy:hover
                     echo "<img src='".$row['media_path']."' width='250px' height='250px' alt='Posts' class='image'>";
                     echo    "<div class='overlay'>";
                     echo        "<div class='caption_text'>".$row['caption']."</div>";
-                    echo        "<a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a>";
+                    echo        "<a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a><br>";
                     echo    "</div>";
                     echo "</div>";
                     
@@ -86,7 +88,19 @@ a.buy:hover
         ?>
     </div>
 </div>
+        <div>
+    <?php
 
+$id='1'; //Post id - Post is "Hi everybody"
+$uid='1'; //User id - User is "Subin Siby"
+$sql=$dbh->prepare("SELECT * FROM fdlikes WHERE pid=? and user=?");
+$sql->execute(array($pid, $uid));
+if($sql->rowCount()==1){
+ echo '<a href="#" class="like" id="'.$id.'" title="Unlike">Unlike</a>';
+}else{ 
+ echo '<a href="#" class="like" id="'.$id.'" title="Like">Like</a>';
+}
+?>
 </body>
 </html>
 

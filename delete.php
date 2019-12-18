@@ -46,7 +46,7 @@ a.buy:hover
                 $image_id = $_GET['id'];
                 echo $use;
 
-                $smtp = $connect->prepare("DELETE FROM media WHERE media . media_id = $image_id");
+                $smtp = $connect->prepare("DELETE FROM media WHERE media . media_id = $image_id ");
                 if($smtp ->execute())
                 {
                     echo '<script language="javascript">alert("Image Deleted")</script>';

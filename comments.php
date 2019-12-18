@@ -1,5 +1,5 @@
 <html>
-<form action="profile.php" method="POST">Comment<br>
+<form action="comments.php" method="POST">Comment<br>
 <textarea name=comt rows="5" cols="60" ></textarea><br>
 <input type="submit" value="comment">
 
@@ -28,14 +28,6 @@ try
 			{
 				echo 'im alive';
 				die();
-				//if(mail(.,.,.,.))
-				// {
-				// 	echo ' ';
-				// }
-				// else 
-				// {
-				// 	echo '';
-				// }
 			}
 			else 
 			{
