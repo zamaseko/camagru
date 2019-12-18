@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include "head.php";
+?>
 <html>
 <form action="comments.php" method="POST">Comment<br>
 <textarea name=comt rows="5" cols="60" ></textarea><br>
@@ -6,7 +10,7 @@
 </form>
 </html>
 <?php
-include 'config/database.php';
+
 
 $comt = $_POST['comt'];
 try
@@ -24,7 +28,7 @@ try
 			$stmt1 = $connect->prepare("SELECT * FROM user WHERE username = :username");
 			$stmt1->execute();
 			$usr = $stmt1->fetch();
-			if($usr[1])
+			if($usr[8] == 1)
 			{
 				echo 'im alive';
 				die();

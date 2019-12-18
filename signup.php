@@ -15,6 +15,7 @@
 		<input type="submit" value="Register" >
 
 </form>
+
 </html>
 
 <?php

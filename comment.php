@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 $use = $_SESSION['vkey'];
 include "head.php"
@@ -14,28 +15,34 @@ include "head.php"
 
 <?php
 $cmt = $_POST['comt'];
-if (isset($_POST['commentMedia']))
+if (isset($use))
 {
-    if (isset($cmt))
-    {
-        $dsn = "mysql:host=$server;dbname=$db";
-        $connect = new PDO($dsn, $user, $password);
-        $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO `commments`(`comment_o`, `comment`) VALUES ('".$_SESSION['vkey']."',  '".$comt."')";
-        $usr = $connect->exec($sql);
-        if($res)
-        {
-            header("Location: profile.php");
-        }
-        else
-        {
-                echo  'failed to add a post';
-        }
+    echo "lile <br>";
+    // if (isset($_POST['comt']))
+    // {
+        // if (isset($cmt))
+        // {
+            
+            $dsn = "mysql:host=$server;dbname=$db";
+            $connect = new PDO($dsn, $user, $password);
+            $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO `commments`(`comment_owner`, `comment`) VALUES ('".$_SESSION['vkey']."',  '".$comt."')";
+            $usr = $connect->exec($sql);
+            if($usr[8] == 1)
+            {
+
+                echo "recieve emaial";
+            }
+            else
+            {
+                    echo  'failed to add a post';
+            }
+        //}
     }
-}
-else
-{
-    echo  'File could not be moved';
-}
+//     else
+//     {
+//         echo  'no comment was found';
+//     }
+// }
 
 ?>
