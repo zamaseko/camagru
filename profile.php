@@ -47,15 +47,14 @@ a.buy:hover
 <div class="inrow"> 
     <div class=camera>
         <img src="http://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/System-webcam-icon.png" style="width:10%" height="55">
-        <a class="webcam" href="webcam.php">Camera</a>
+        <a class="webcam" href="camera.php">Camera</a>
     </div>
     <div class="posted">
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
         <a class="post" href="post_it.php">Post</a>   
     </div>
     <div>
-    <a href="comment.php">comment</a>
-
+   <a href="Likes.php" >LIKE</a>
     <div>
     <br/>        
     <?php
@@ -64,14 +63,49 @@ a.buy:hover
             $dsn = "mysql:host=$server;dbname=$db";
             $connect = new PDO($dsn, $user, $password);
             $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $connect->prepare("SELECT u.vkey, m.o_vkey, m.media_path, m.media_id, m.caption, m.media_date FROM users u, media m WHERE u.vkey = m.o_vkey ORDER BY media_date DESC");
+            $stmt = $connect->prepare("SELECT u.vkey, u.username, m.o_vkey, m.media_path, m.media_id, m.caption, m.media_date FROM users u, media m WHERE u.vkey = m.o_vkey ORDER BY media_date DESC");
             $stmt->execute();
             if ($stmt === false)
             {
                 echo 'No Posts Yet';
             }else{
                 foreach ($stmt as $row) {
+                    $image_id = $row['media_id'];
                     echo "<img src='".$row['media_path']."' width='250px' height='250px' alt='Posts' class='image'>";
+                    echo "<form action='profile.php' method='POST'>Comment:<br>";
+                    echo "<input type='hidden' name='imageID' value='$image_id'>";
+                    echo "<textarea name='comt' rows='5' cols='60' ></textarea><br> ";
+                    echo "<input type='submit' value='submit' name='commentMedia'>";
+                    echo "</form>";
+                     $User = $row['username'];
+                     $comt = $_POST['comt'];
+                     $image_id = $row['media_id'];
+                    // <?php
+                    $cmt = $_POST['commentMedia'];
+                    if (isset($use))
+                    {
+                        if((isset($_POST['commentMedia'])) && ($_POST['imageID'] == $image_id))
+                        {
+                            
+                            $dsn = "mysql:host=$server;dbname=$db";
+                            $connect = new PDO($dsn, $user, $password);
+                            $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "INSERT INTO `comments`(`comment_owner`, `image_id`, `comment`) VALUES ('".$User."', '".$image_id."', '".$comt."') ";
+                            $usr = $connect->exec($sql);
+                            if($usr[8] == 1)
+                            {
+                                echo "recieve email";
+                            }
+                            else
+                            {
+                                    echo  'failed to add a post';
+                            };
+                        }
+                        else if(!(isset($_POST['commentMedia'])))
+                        echo "working <br>";
+                        else
+                        echo "does not work <br>";                
+                        }                       
                     echo    "<div class='overlay'>";
                     echo        "<div class='caption_text'>".$row['caption']."</div>";
                     echo        "<a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a><br>";
@@ -89,18 +123,7 @@ a.buy:hover
     </div>
 </div>
         <div>
-    <?php
-
-$id='1'; //Post id - Post is "Hi everybody"
-$uid='1'; //User id - User is "Subin Siby"
-$sql=$dbh->prepare("SELECT * FROM fdlikes WHERE pid=? and user=?");
-$sql->execute(array($pid, $uid));
-if($sql->rowCount()==1){
- echo '<a href="#" class="like" id="'.$id.'" title="Unlike">Unlike</a>';
-}else{ 
- echo '<a href="#" class="like" id="'.$id.'" title="Like">Like</a>';
-}
-?>
+   
 </body>
 </html>
 

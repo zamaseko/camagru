@@ -14,7 +14,7 @@ try
 	$connect->exec($mysq);
 	echo "Database successfully created<br>";
 
-		$sql1 = "CREATE TABLE camagru_db.users (
+		$sql1 = "CREATE TABLE  camagru_db.users (
 			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 		 	username varchar(20) NOT NULL UNIQUE KEY  , 
 		  	firstname varchar(20) NOT NULL , 
@@ -48,8 +48,9 @@ try
 			echo "Likes table created successfully<br>";
 			
 			$sql4 = "CREATE TABLE camagru_db.comments (
+			id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 			comment_owner text NOT NULL, 
-		  	comment_media text NOT NULL ,
+		  	image_id int NOT NULL ,
 			comment text NOT NULL,
 			com_date datetime DEFAULT CURRENT_TIMESTAMP
 			)";

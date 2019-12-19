@@ -14,10 +14,18 @@ include "head.php"
 </html>
 
 <?php
-$cmt = $_POST['comt'];
+$cmt = $_POST['commentMedia'];
 if (isset($use))
 {
-    echo "lile <br>";
+    if(!(isset($_POST['commentMedia'])))
+    {
+        echo "empty <br>";
+    }
+    else if(isset($_POST['commentMedia']))
+    echo "working <br>";
+    else
+    echo "does not work <br>";
+    exit();
     // if (isset($_POST['comt']))
     // {
         // if (isset($cmt))
