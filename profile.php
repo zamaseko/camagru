@@ -47,14 +47,13 @@ a.buy:hover
 <div class="inrow"> 
     <div class=camera>
         <img src="http://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/System-webcam-icon.png" style="width:10%" height="55">
-        <a class="webcam" href="camera.php">Camera</a>
+        <a class="webcam" href="camera2.php">Camera</a>
     </div>
     <div class="posted">
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
         <a class="post" href="post_it.php">Post</a>   
     </div>
     <div>
-   <a href="Likes.php" >LIKE</a>
     <div>
     <br/>        
     <?php

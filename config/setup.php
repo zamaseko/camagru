@@ -40,7 +40,7 @@ try
 	echo "Media table created successfully<br>";
 
 		$sql3 = "CREATE TABLE camagru_db.likes (
-			like_id text NOT NULL ,
+			like_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		  	like_media int NOT NULL DEFAULT 0 , 
 			like_user text NOT NULL 
 				)"; 

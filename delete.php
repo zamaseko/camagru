@@ -47,11 +47,15 @@ a.buy:hover
                 echo $use;
 
                 $smtp = $connect->prepare("DELETE FROM media WHERE media . media_id = $image_id ");
+                // $smtp2= $connect->prepare("DELETE FROM comments WHERE comments . media_id = $image_id ");
+                //$smtp = $connect->prepare("DELETE FROM likes WHERE media . media_id = $image_id ");
                 if($smtp ->execute())
                 {
                     echo '<script language="javascript">alert("Image Deleted")</script>';
                     header("refresh:0.5; url=profile.php");
                 }
+                
+
             }catch(PDOException $e)
             {
                 echo $e->getMessage();
