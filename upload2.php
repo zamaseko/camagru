@@ -15,7 +15,7 @@ else{
 	$ss = $_GET['ss'];
 	//$d = $_GET['d'];
     $upload_dir = "uploads/";
-    $img = $_POST['img'];
+    $img = $_POST['hidden_id'];
     $img = str_replace('data:upload/png;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
     $data = base64_decode($img);

@@ -22,20 +22,20 @@ include "head.php";
         <a href="#" id="save_stickers" class="btn btn-light">save sticker</a>
       
               <img
-                src="./stickers/love.png"
+                src="stickers/love.png"
                 id="x"
                 style="height: 80px; width: 80px;"
                 onclick="draw('x', 500, 300);"
               /> 
 
             <img
-              src="./stickers/bae.png"
+              src="stickers/bae.png"
               id="x"
               style="height: 80px; width: 80px;"
               onclick="draw('x', 500, 300);"
             />
             <img
-              src="./stickers/vip.png"
+              src="stickers/vip.png"
               id="x"
               style="height: 80px; width: 80px;"
               onclick="draw('x', 500, 300);"
@@ -58,6 +58,6 @@ include "head.php";
       <div id="photos"></div>
     </div>
 
-    <script src="./js/camera.js"></script>
+    <script src="js/Camera.js"></script>
   </body>
 </html>

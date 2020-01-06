@@ -45,16 +45,14 @@ a.buy:hover
 	<!--a class="logout" href="Logout.php" type="button">Logout</a-->
     </div>
 <div class="inrow"> 
-    <div class=camera>
+    <!--div class=camera-->
         <img src="http://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/System-webcam-icon.png" style="width:10%" height="55">
         <a class="webcam" href="camera2.php">Camera</a>
-    </div>
-    <div class="posted">
+    <!--/div-->
+    <!--div class="posted"-->
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
         <a class="post" href="post_it.php">Post</a>   
     </div>
-    <div>
-    <div>
     <br/>        
     <?php
         include 'config/database.php';
@@ -71,40 +69,52 @@ a.buy:hover
                 foreach ($stmt as $row) {
                     $image_id = $row['media_id'];
                     echo "<img src='".$row['media_path']."' width='250px' height='250px' alt='Posts' class='image'>";
-                    echo "<form action='profile.php' method='POST'>Comment:<br>";
-                    echo "<input type='hidden' name='imageID' value='$image_id'>";
-                    echo "<textarea name='comt' rows='5' cols='60' ></textarea><br> ";
-                    echo "<input type='submit' value='submit' name='commentMedia'>";
-                    echo "</form>";
-                     $User = $row['username'];
-                     $comt = $_POST['comt'];
-                     $image_id = $row['media_id'];
-                    // <?php
-                    $cmt = $_POST['commentMedia'];
-                    if (isset($use))
-                    {
-                        if((isset($_POST['commentMedia'])) && ($_POST['imageID'] == $image_id))
-                        {
+                    // echo "<form action='profile.php' method='POST'>Comment:<br>";
+                    // echo "<input type='hidden' name='imageID' value='$image_id'>";
+                    // echo "<textarea name='comt' rows='5' cols='60' ></textarea><br> ";
+                    // echo "<input type='submit' value='submit' name='commentMedia'>";
+                    // echo "</form>";
+                    //  $User = $row['username'];
+                    //  $comt = $_POST['comt'];
+                    //  $image_id = $row['media_id'];
+                    // // <?php
+                    // $cmt = $_POST['commentMedia'];
+                    // $notif = 1;
+                    // if (isset($use))
+                    // {
+                    //     if((isset($_POST['commentMedia'])) && ($_POST['imageID'] == $image_id))
+                    //     {
                             
-                            $dsn = "mysql:host=$server;dbname=$db";
-                            $connect = new PDO($dsn, $user, $password);
-                            $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $sql = "INSERT INTO `comments`(`comment_owner`, `image_id`, `comment`) VALUES ('".$User."', '".$image_id."', '".$comt."') ";
-                            $usr = $connect->exec($sql);
-                            if($usr[8] == 1)
-                            {
-                                echo "recieve email";
-                            }
-                            else
-                            {
-                                    echo  'failed to add a post';
-                            };
-                        }
-                        else if(!(isset($_POST['commentMedia'])))
-                        echo "working <br>";
-                        else
-                        echo "does not work <br>";                
-                        }                       
+                    //         $dsn = "mysql:host=$server;dbname=$db";
+                    //         $connect = new PDO($dsn, $user, $password);
+                    //         $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					// 		$sql = "INSERT INTO `comments`(`comment_owner`, `image_id`, `comment`) VALUES ('".$User."', '".$image_id."', '".$comt."') ";
+					// 		$stmt = $connect->exec($sql);
+					// 		// $stmt1 = $connect->prepare("SELECT * FROM users WHERE username = :username AND notif = :notif ");
+                    //         // //$stmt1 = $connect->prepare($mys);
+                    //         // $stmt1->bindValue('username', $User);
+					// 		// $stmt1->execute('username', $User);
+					// 		// $usr = $stmt1->fetch();
+                    //         if($User)
+					// 		{
+                    //             if ($notif == 1)
+                    //             {
+                    //                 echo "recieve email";
+                    //             }
+                    //             else {
+                    //                 echo 'You are not a user'; 
+                    //             }
+                    //         }
+                    //         else
+                    //         {
+                    //                 echo  'failed to add a post';
+                    //         };
+                    //     }
+                    //     else if(!(isset($_POST['commentMedia'])))
+                    //     echo "working <br>";
+                    //     else
+                    //     echo "does not work <br>";                
+                    //     }                       
                     echo    "<div class='overlay'>";
                     echo        "<div class='caption_text'>".$row['caption']."</div>";
                     echo        "<a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a><br>";

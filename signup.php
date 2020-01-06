@@ -43,6 +43,7 @@ try
 			{
 				if($usr[1] != $usrname && $usr[5] != $email)
 				{
+					
 					if(filter_var(trim($email), FILTER_VALIDATE_EMAIL))
 					{
 						$vkey = "123456789ABCDEFGHIJKLMNavkfirutbeifgnhgkwjhD";

@@ -54,7 +54,18 @@ a.buy:hover
                     echo '<script language="javascript">alert("Image Deleted")</script>';
                     header("refresh:0.5; url=profile.php");
                 }
-                
+                try{
+                    $smtp2= $connect->prepare("DELETE FROM comments WHERE comments . media_id = $image_id ");
+                    if($stmp2->execute())
+                    {
+                        echo '<script language="javascript">alert("Image Deleted")</script>';
+                        header("refresh:0.5; url=profile.php");
+                    }
+                }
+                catch(PDOException $e)
+                {
+                    echo $e;
+                }
 
             }catch(PDOException $e)
             {

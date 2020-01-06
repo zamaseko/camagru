@@ -1,8 +1,8 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-session_start(); 
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+//session_start(); 
 ?>
 <html>
 <head>
@@ -31,8 +31,6 @@ session_start();
 <?php
 include 'config/database.php';
 $usrname = $_POST['username'];
-// var_dump($usrname);
-// die();
 $passwd =md5($_POST['pass_word']);
 try
 {
