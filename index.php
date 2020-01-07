@@ -9,6 +9,11 @@
         <title>Camagru-login page</title>
         <link rel="stylesheet" href="style.css">
 </head>
+<style>
+div a{
+	text-decoration: none;
+}
+</style>
 <body>
         <div class="box">
                 <form action="index.php"  method="POST">
@@ -20,7 +25,8 @@
                 </div>
                 <div>
                         <a href="signup.php" type="button" >Sign Up</a><br><br>
-                        <a href="forgotpwd.php" type="button">Forgot Password?</a>
+                        <a href="forgotpwd.php" type="button">Forgot Password?</a><br>
+						<a href="gallery.php" type="button"> Gallery</a>
                 </div>
                 </form>
         </div>

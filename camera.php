@@ -1,63 +1,92 @@
 <?php
-include "head.php"; 
+session_start();
+	include_once("head.php");
+	$use = $_SESSION['vkey'];
 ?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Camera</title>
-    <!--link rel="stylesheet" type="text/css" href="./CSS/camera.css" />
-    <link rel="stylesheet" type="text/css" href="./CSS/header.css" /-->
-  </head>
-  <body>
-    <div class="navbar"></div>
-
-    <div class="top-container">
-      <!-- <form method="post" action="cam_processer.php">  </form>-->
-      <video id="video" height="500" width="500" autoplay>video not available</video>
-      <br />
-      <div class="stickers">
-        <a href="#" id="save_stickers" class="btn btn-light">save sticker</a>
-      
-              <img
-                src="stickers/love.png"
-                id="x"
-                style="height: 80px; width: 80px;"
-                onclick="draw('x', 500, 300);"
-              /> 
-
-            <img
-              src="stickers/bae.png"
-              id="x"
-              style="height: 80px; width: 80px;"
-              onclick="draw('x', 500, 300);"
-            />
-            <img
-              src="stickers/vip.png"
-              id="x"
-              style="height: 80px; width: 80px;"
-              onclick="draw('x', 500, 300);"
-            >
-      </div>
-      <br />
-    <div>
-      <button id="photo-button" class="btn btn-dark"onclick="snap();" >Take Photo</button>
-       <canvas id="canvas" height="500" width="500"></canvas>
-      <button id="clear-button" class="btn btn-light">Clear</button>
-      <form action="upload.php" method="POST">
-        <input type="hidden" id="hidden_data" name="hidden_id" />
-        <input type="submit" class="btn btn-dark" id="image_saver" name="image_saver" value="Save"/>
-        <input type="hidden" id="sticker" name="addsticker" />
-        <input type="submit" class="btn btn-dark" id="sticker_saver" name="sticker_saver" value="Save sticker"/>
-      </form>
-    </div>
-
-    <div class="btom-container">
-      <div id="photos"></div>
-    </div>
-
-    <script src="js/Camera.js"></script>
-  </body>
+<html>
+	<body>
+		<div style="text-align:center">
+			<div>
+				<div>
+					<img id="vip" style = "display:inline-block; margin-right:5px;" src="vip.png" alt="vip" width=100 height=100>
+					<img id="bae" style = "display:inline-block; margin-right:5px;" src="stickers/bae.png" alt="bae" width=100 height=100>
+					<img id="love" style = "display:inline-block; margin-right:5px;" src="stickers/love.png" alt="love" width=100 height=100>
+				</div>
+				<div style="margin-bottom: 15px">
+					<video id="video" autoplay></video><br/>
+				</div>
+				<div style="margin-bottom: 15px">
+					<button class="btn profile_buttons outline" id="shoot" capture="camera">Capture</button>
+					<br>
+					<select id="stickers" style="font-size: 20px;height: 40px;">
+						<option value="none">none</option>
+						<option value="vip">vip</option>
+						<option value="bae">bae</option>
+						<option value="love">love</option>
+					</select>
+					<br>
+					<button class="btn profile_buttons outline" id="apply">Apply</button>
+					<button class="btn profile_buttons blue" id="save" name="img">Upload</button>
+				</div>
+				<div style="margin-bottom: 15px">
+						<canvas id="canvas" width=416 height=300></canvas>
+				</div>
+		</div>
+				
+				<br>
+			</div>
+		<div>
+	</div> 
+	<script>
+		
+		const video = document.getElementById('video');
+		const canvas = document.getElementById('canvas');
+		const shoot = document.getElementById('shoot');
+		const apply = document.getElementById('apply');
+		const vip = document.getElementById('vip');
+		const bae = document.getElementById('bae');
+		const love = document.getElementById('love');
+		feed();
+		var context = canvas.getContext('2d');
+		shoot.addEventListener("click", function () {
+			context.drawImage(video, 0, 0, 416, 300);
+		});
+		function feed() {
+			var constrains = {
+				video: { width: 416, height: 300 }
+			};
+			navigator.mediaDevices.getUserMedia(constrains).then(stream => {
+				video.srcObject = stream;
+			});
+		}
+		apply.addEventListener("click", function() {
+			var x = document.getElementById('stickers').value;
+			if (x == "vip")
+				context.drawImage(vip, 20, 20, 80, 80);
+			else if (x == "love")
+				context.drawImage(bae, 80, 20, 80, 80);
+			else if (x == "bae")
+				context.drawImage(love, 20, 80, 80, 80);
+			else
+				context.drawImage(video, 0, 0, 416, 300);
+		})
+		var save = document.getElementById("save");
+		 save.addEventListener("click", function () {
+	 //var element = document.getElementById( 'picture' );
+    	var img = canvas.toDataURL( 'image/png' );
+    	save.setAttribute('value', img);
+//	var data = "img=" + canvas.toDataURL();
+	//	var xhttp = new XMLHttpRequest();
+	//	xhttp.onreadystatechange = function () {
+	//		if (this.readyState == 4 && this.status == 200) {
+	//			alert("success");
+	//		location.reload();
+			}
+			};
+			xhttp.open("POST", "upload.php", true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send(data);
+		});
+	</script>
+	</body>
 </html>
