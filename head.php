@@ -1,8 +1,6 @@
 <?php
 session_start();
 $use = $_SESSION['vkey'];
-//echo $use;
-//die();
 include 'config/database.php';
 
 if ($use)
@@ -10,7 +8,6 @@ if ($use)
 	$dsn = "mysql:host=$server;dbname=$db";
 	$connect = new PDO($dsn, $user, $password);
 	$stmt = $connect->prepare("SELECT * FROM users WHERE vkey = :vkey");
-	//$stmt = $connect->prepare($mys);
 	$stmt->bindParam(':vkey', $use);
 	$stmt->execute(['vkey' => $use]);
 	$usr = $stmt->fetch();

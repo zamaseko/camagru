@@ -1,13 +1,4 @@
-<html>
-    <body>
-    <script>
-            
-    </script>
-    </body>
-</html>
-
 <?php
-
 include 'config/database.php';
 
 if (isset($_GET['action']) == 'signup')

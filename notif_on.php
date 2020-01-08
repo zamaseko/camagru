@@ -2,7 +2,7 @@
 session_start();
 $use = $_SESSION['vkey'];
 include "config/database.php";
-//$not = 1;
+
 try
 {    
     $dsn = "mysql:host=$server;dbname=$db";
@@ -18,7 +18,6 @@ try
         {
             $stmt = $connect->prepare("UPDATE users SET notif = '1' WHERE vkey = :vkey");
             $stmt->bindParam(':vkey', $use);
-            //$stmt->bindParam(':vkey', $vkey);
             $stmt->execute();
             header("Location: notif.php");
         }

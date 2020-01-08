@@ -44,8 +44,7 @@ a.buy:hover
         {
             try{
                 $image_id = $_GET['id'];
-                echo $use;
-
+                
                 $smtp = $connect->prepare("DELETE FROM media WHERE media . media_id = $image_id ");
                 // $smtp2= $connect->prepare("DELETE FROM comments WHERE comments . media_id = $image_id ");
                 //$smtp = $connect->prepare("DELETE FROM likes WHERE media . media_id = $image_id ");
