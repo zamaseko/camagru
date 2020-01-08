@@ -59,9 +59,7 @@ else
 <div>
 	<h1 class="title">camagru<h1>
 	<nav class="navigation">
-		<!--a href="index.php">Home &emsp;&emsp;&emsp;&emsp;</a>-->
 		<a href="explore.php">Explore &emsp;&emsp;&emsp;&emsp;</a>
-		<a href="search.php">Search &emsp;&emsp;&emsp;&emsp;</a>
 		<a href="profile.php">Profile</a>
 	</nav>
 </div>

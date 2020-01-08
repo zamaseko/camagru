@@ -47,7 +47,7 @@ a.buy:hover
 <div class="inrow"> 
     <!--div class=camera-->
         <img src="http://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/System-webcam-icon.png" style="width:10%" height="55">
-        <a class="webcam" href="camera3.php">Camera</a>
+        <a class="webcam" href="camera.php">Camera</a>
     <!--/div-->
     <!--div class="posted"-->
         <img src="https://icon-library.net/images/posting-icon/posting-icon-15.jpg" style="width:10%" height="55" >
@@ -68,7 +68,7 @@ a.buy:hover
             }else{
                 foreach ($stmt as $row) {
                     $image_id = $row['media_id'];
-                    echo "<img src='".$row['media_path']."' width='250px' height='250px' alt='Posts' class='image'>";
+                    echo "<img src='".$row['media_path']."' width='250px' height='250px' class='image'>";
                     // echo "<form action='profile.php' method='POST'>Comment:<br>";
                     // echo "<input type='hidden' name='imageID' value='$image_id'>";
                     // echo "<textarea name='comt' rows='5' cols='60' ></textarea><br> ";
