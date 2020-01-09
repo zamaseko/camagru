@@ -2,9 +2,6 @@
 
 include 'database.php';
 
-//$server = 'localhost';
-//$user = 'root';
-//$password = 'zandilem';
 $dsns = "mysql:host=$server";
 try
 {
@@ -34,7 +31,6 @@ try
 		  	media_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 		  	media_path text NOT NULL ,
 			caption text NULL , 
-			med_like int NOT NULL DEFAULT 0
 			)";  
 			$connect->exec($sql2);
 	echo "Media table created successfully<br>";

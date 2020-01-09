@@ -111,5 +111,5 @@ try
 }
 catch(PDOException $e)
 {
-	echo $e;'Registration unsucessfull. Try again!!';
+	echo 'Registration unsucessfull. Try again!!';
 }

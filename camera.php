@@ -83,7 +83,7 @@ session_start();
 		xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log(this.responseText);
-					alert("Picture Upload");
+					alert("Picture Uploaded";
 					location.reload();
 				}
 			};
