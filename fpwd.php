@@ -20,7 +20,6 @@ try
     else 
     {
         header("Location: index.php");
-        echo 'New password created successful';
     }
 }
 catch(PDOException $e)

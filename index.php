@@ -36,7 +36,7 @@ div a{
 </html>
 
 <?php
-//include 'config/database.php';
+include 'config/database.php';
 $usrname = $_POST['username'];
 $passwd =md5($_POST['pass_word']);
 try

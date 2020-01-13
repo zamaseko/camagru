@@ -1,6 +1,6 @@
 <?php
- include "head.php";
- //session_start();
+include "head.php";
+session_start();
  $use = $_SESSION['vkey'];
  ?>
 <html>
