@@ -18,7 +18,7 @@ else
 	header("Location: index.php");
 }
 ?>
-<!<html>
+<html>
 	<style>	
 	body
 	{

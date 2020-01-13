@@ -7,7 +7,7 @@
 
 <?php
 
-//session_start();
+session_start();
 include "config/database.php";
 include "head.php";
 
