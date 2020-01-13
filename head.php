@@ -20,6 +20,9 @@ else
 ?>
 <html>
 	<style>	
+	*{
+		box-sizing: border-box;
+	}
 	body
 	{
 		background-color:lightsalmon;

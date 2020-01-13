@@ -52,7 +52,7 @@ session_start();
 		
 	var context = canvas.getContext('2d');
 	shoot.addEventListener("click", function () {
-		context.drawImage(video, 0, 0, 500, 400);
+		2
 	});
 	
 	function activateCam() {
@@ -83,8 +83,6 @@ session_start();
 		xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log(this.responseText);
-					alert("Picture Uploaded");
-					location.reload();
 				}
 			};
 			
