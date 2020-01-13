@@ -19,6 +19,7 @@ try
     else 
     {
         echo 'Password update not successful';
+        
     }
 }
 catch(PDOException $e)

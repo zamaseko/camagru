@@ -49,7 +49,7 @@ try
                         
                                 if(mail($eml, $email_cont, $content, $head))
                                 {
-                                echo 'Username change request sent to your email address.';
+                                echo 'Password change request sent to your email address.';
                             }
                             else
                                 {

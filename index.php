@@ -79,10 +79,3 @@ catch(PDOException $e)
 	echo $e;
 }
 ?>
-
-<html>
-<footer>
-<hr>
-		<p>&copy;zamaseko 2019</p>
-</footer>
-</html>

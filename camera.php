@@ -1,7 +1,7 @@
 <?php
 session_start();
-	include_once("head.php");
-	$use = $_session['vkey'];
+	include "head.php";
+	$use = $_SESSION['vkey'];
 ?>
 <html>
 	<body>
@@ -16,7 +16,7 @@ session_start();
 					<video id="video" autoplay></video><br/>
 				</div>
 				<div style="margin-bottom: 15px">
-					<button class="btn profile_buttons outline" id="shoot" capture="camera">capture</button>
+					<button class="btn profile_buttons outline" id="shoot" capture="camera">Shoot</button>
 					<br>
 					<select id="stickers" style="font-size: 20px;height: 40px;">
 						<option value="none">none</option>
@@ -50,16 +50,16 @@ session_start();
 
 	activateCam();
 		
-	var context = canvas.getContext("2d");
+	var context = canvas.getContext('2d');
 	shoot.addEventListener("click", function () {
 		context.drawImage(video, 0, 0, 500, 400);
 	});
 	
 	function activateCam() {
-		var constraints = {
+		var constrains = {
 		video: { width: 500, height: 400}
 	};
-		navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+		navigator.mediaDevices.getUserMedia(constrains).then(stream => {
 		video.srcObject = stream;
 	});
 	}
@@ -83,7 +83,7 @@ session_start();
 		xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log(this.responseText);
-					alert("Picture Uploaded";
+					alert("Picture Uploaded");
 					location.reload();
 				}
 			};

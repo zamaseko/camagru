@@ -76,7 +76,7 @@ a.buy:hover
                     echo "<img src='".$row['media_path']."' width='250px' height='250px' class='image'></br>";                      
                     echo    "<div class='overlay'>";
                     echo        "<div class='caption_text'>".$row['caption']."</div>";
-                    echo        "<a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a><br>";
+                    echo        "<button><a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a></button><br>";
                     echo    "</div>";
                     echo "</div>";
                     

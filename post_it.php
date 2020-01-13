@@ -13,6 +13,7 @@ if(!isset($_SESSION['vkey']))
 	<textarea name="caption" rows="5" cols="60"></textarea><br>
 		<input type="file" name="image">
         <input type="submit" value="upload" name="imageUpload">
+		<script type='text/javascript'>alert('THE GAME');</script>
 	</form>
 </html>
 <?php

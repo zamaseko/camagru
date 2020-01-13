@@ -14,10 +14,12 @@ try
     $stmt->execute(['pass_word' => $opwd , 'email_address' => $em]);
     if($usr[4] == $opwd)
     {
+        
         echo 'New Password not successfully been created';
     }
     else 
     {
+        header("Location: index.php");
         echo 'New password created successful';
     }
 }

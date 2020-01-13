@@ -56,11 +56,13 @@ else
 <div>
 	<h1 class="title">camagru<h1>
 	<nav class="navigation">
-		<a href="explore.php">Explore &emsp;&emsp;&emsp;&emsp;</a>
+		<a href="gallery.php">Gallery &emsp;&emsp;&emsp;&emsp;</a>
 		<a href="profile.php">Profile</a>
 	</nav>
 </div>
+
 </body>
+
 </html>
 
 

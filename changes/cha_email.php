@@ -4,15 +4,15 @@
 	<link rel="stylesheet" href="../style.css"> 
 </head>
 	<form action="cha_email.php" method="POST"><br>
-		Enter current email address:<br><input type="text" name="username" required><br><br>
+		Enter Username:<br><input type="text" name="username" required><br><br>
 		Enter Current email:<br><input type="email" name="pre_e" required><br><br>
-		Enter New Desired Eamil: <br><input type="email" name="new_e"required><br><br>
-		<input type="submit" name="email_address" value="submit"><br><br>
+		Enter New Desired Email: <br><input type="email" name="new_e"required><br><br>
+		<script type='text/javascript'>alert('THE GAME');</script>
 	<form>
 </html>
 
 <?php
-;
+
 
 
 $eml = $_POST['pre_e'];
@@ -40,8 +40,8 @@ try
       		    	$head = "From noreply@camagruteam.co.za" . "\r\n";
 	        		$head .= 'MIME-Version: 1.0' . "\r\n";
 	    	    	$head .= 'Content-type:text/html charset=iso-8859-1<br><br>';
-                    $content = "Hey $fname $lname. <br> We have noticed that you requested to change you email address <br>
-                       $usrname <br><br>
+                    $content = "Hey $usrn. <br> We have noticed that you requested to change you email address <br>
+                        <br><br>
 		    			In order to change your email address please click the link below <br><br>
 	    				<a href='http://localhost:8080/camagru/changes/update_email.php?email=$eml&new=$neml&usr=$usrn'>Change email address</a> <br><br>
                         From: The Camagru team";

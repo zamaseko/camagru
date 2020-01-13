@@ -30,7 +30,7 @@ try
 			o_vkey varchar(255) NOT NULL , 
 		  	media_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 		  	media_path text NOT NULL ,
-			caption text NULL , 
+			caption text NULL  
 			)";  
 			$connect->exec($sql2);
 	echo "Media table created successfully<br>";
