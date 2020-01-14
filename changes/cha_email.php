@@ -7,7 +7,7 @@
 		Enter Username:<br><input type="text" name="username" required><br><br>
 		Enter Current email:<br><input type="email" name="pre_e" required><br><br>
 		Enter New Desired Email: <br><input type="email" name="new_e"required><br><br>
-		<script type='text/javascript'>alert('THE GAME');</script>
+		<input type="submit" value="submit"><br>
 	<form>
 </html>
 
@@ -15,9 +15,9 @@
 
 
 
-$eml = $_POST['pre_e'];
-$neml = $_POST['new_e'];
-$usrn = $_POST['username'];
+$eml = strip_tags($_POST['pre_e']);
+$neml = strip_tags($_POST['new_e']);
+$usrn = strip_tags($_POST['username']);
 
 try
 {

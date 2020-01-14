@@ -16,9 +16,9 @@
 include_once '../config/database.php';
 
 
-$eml = $_POST['u_e'];
-$usrn = $_POST['uname'];
-$c_us = $_POST['c_u'];
+$eml = strip_tags($_POST['u_e']);
+$usrn = strip_tags($_POST['uname']);
+$c_us = strip_tags($_POST['c_u']);
 
 try
 {

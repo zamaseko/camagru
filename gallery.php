@@ -1,11 +1,4 @@
 <?php
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-//session_start();
-?>
-
-<?php
 
 session_start();
 include "config/database.php";
@@ -27,7 +20,7 @@ try
         $counter = 0;
         while($fetch_it)
         {
-            echo '<a href=gallery.php><img src=""></a>';
+            echo "<a href=gallery.php><img src=".$fetch_it[$counter][3]."></a>";
             $counter++;
        }
     }

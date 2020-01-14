@@ -5,7 +5,6 @@
 	<form action="forgotpwd.php" method="POST"><br>
 		Enter Current email:<br><input type="email" name="e" required><br><br>
 		<input type="submit" name= "email_address" value="submit"><br><br>
-		<script type='text/javascript'>alert('THE GAME');</script>
 		
 	<form>
 </html>
@@ -15,9 +14,7 @@
 
 include_once 'config/database.php';
 
-//$email = $_POST['e'];
-$email = filter_var($_POST['e'], FILTER_SANITIZE_EMAIL);
-
+$email = strip_tags($_POST['e']);
 try
 {
 	$dsn = "mysql:host=$server;dbname=$db";

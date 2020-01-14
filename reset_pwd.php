@@ -13,7 +13,7 @@
 
 include_once 'config/database.php';
 
-$eml = $_POST['u_e'];
+$eml = strip_tags($_POST['u_e']);
 $pwd = md5($_POST['pwd']);
 
 try

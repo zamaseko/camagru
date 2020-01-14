@@ -27,7 +27,7 @@ div a{
                         <a href="signup.php" type="button" >Sign Up</a><br><br>
                         <a href="forgotpwd.php" type="button">Forgot Password?</a><br>
 						<a href="gallery.php" type="button"> Gallery</a>
-                </div>
+				</div>
                 </form>
         </div>
 		
@@ -37,7 +37,8 @@ div a{
 
 <?php
 include 'config/database.php';
-$usrname = $_POST['username'];
+
+$usrname = filter_var($_POST['username'], FILTER_SANITIZE_STRING); //($_POST['username']);
 $passwd =md5($_POST['pass_word']);
 try
 {

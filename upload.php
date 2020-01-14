@@ -22,7 +22,6 @@ else{
         $stmt->bindParam(':media_path', $image);
         $stmt->bindParam(':caption', $clean);
         $stmt->execute();
-       
     }
     else
 	{

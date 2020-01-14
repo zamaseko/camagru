@@ -21,12 +21,12 @@
 <?php
 include "./config/database.php";
 
-$usrname = $_POST['u'];
+$usrname = strip_tags($_POST['u']);
 $passwd = trim($_POST['p1']);
 $passwd2 = trim($_POST['p2']);
-$fname = $_POST['fn'];
-$lname = $_POST['sn'];
-$email = $_POST['e'];
+$fname = strip_tags($_POST['fn']);
+$lname = strip_tags($_POST['sn']);
+$email = strip_tags($_POST['e']);
 try
 {
 	if (!empty($usrname) && !empty($passwd) && !empty($passwd2) && !empty($email) && !empty($fname) && !empty($lname))
