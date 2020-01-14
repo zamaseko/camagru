@@ -6,7 +6,8 @@ if(!isset($_SESSION['vkey']))
     header("Location: index.php");
 }
 else{
-    $use = $_SESSION['vkey'];
+	$use = $_SESSION['vkey'];
+	$clean = "";
     $time = date("Y-m-d H:i:s");
 	$upload = "uploads/";
     $img = $_POST['img'];

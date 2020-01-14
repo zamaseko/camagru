@@ -1,7 +1,7 @@
 <?php
 session_start();
-	include "head.php";
-	$use = $_SESSION['vkey'];
+include_once("head.php");
+$use = $_session['vkey'];
 ?>
 <html>
 	<body>
@@ -16,7 +16,7 @@ session_start();
 					<video id="video" autoplay></video><br/>
 				</div>
 				<div style="margin-bottom: 15px">
-					<button class="btn profile_buttons outline" id="shoot" capture="camera">Shoot</button>
+					<button class="btn profile_buttons outline" id="shoot" capture="camera">capture</button>
 					<br>
 					<select id="stickers" style="font-size: 20px;height: 40px;">
 						<option value="none">none</option>
@@ -47,19 +47,18 @@ session_start();
 	const vip = document.getElementById("vip");
 	const bae = document.getElementById("bae");
 	const love = document.getElementById("love");
-
 	activateCam();
 		
-	var context = canvas.getContext('2d');
+	var context = canvas.getContext("2d");
 	shoot.addEventListener("click", function () {
-		2
+		context.drawImage(video, 0, 0, 500, 400);
 	});
 	
 	function activateCam() {
-		var constrains = {
+		var constraints = {
 		video: { width: 500, height: 400}
 	};
-		navigator.mediaDevices.getUserMedia(constrains).then(stream => {
+		navigator.mediaDevices.getUserMedia(constraints).then(stream => {
 		video.srcObject = stream;
 	});
 	}
@@ -75,7 +74,6 @@ session_start();
 		else
 			context.drawImage(video, 0, 0, 500, 400);
 	});
-
 	
 	upload.addEventListener("click", function() {	
 		var data = "img=" + canvas.toDataURL();		
