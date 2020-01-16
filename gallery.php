@@ -18,7 +18,7 @@ try
         $fetch_it = $stmt->fetchAll();
         $hw_many = count($fetch_it);
         $counter = 0;
-        while($fetch_it)
+        while($counter < $hw_many)
         {
             echo "<a href=gallery.php><img src=".$fetch_it[$counter][3]."></a>";
             $counter++;
