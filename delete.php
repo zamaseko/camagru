@@ -38,6 +38,8 @@ a.buy:hover
 <body>
 
 <?php
+if (isset($use))
+{
     if(isset($_GET['remove']) && $_GET['remove'] == 'delete')
     {
         if(isset($_GET['id']))
@@ -70,8 +72,7 @@ a.buy:hover
             }
         }
     }
-
-
+}
 ?>
 
 
