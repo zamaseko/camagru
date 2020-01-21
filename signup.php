@@ -12,7 +12,7 @@
 		email address:<br><input type="email" name="e" required><br>
 		Password:<br><input type="password" name="p1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br>
 		Re-enter Password: <br><input type="password" name="p2" required><br>
-		<input type="submit" value="Register" >
+		<input type="submit" value="Register" name="sign_up">
 
 </form>
 
@@ -20,96 +20,99 @@
 
 <?php
 include "./config/database.php";
-
-$usrname = strip_tags($_POST['u']);
-$passwd = trim($_POST['p1']);
-$passwd2 = trim($_POST['p2']);
-$fname = strip_tags($_POST['fn']);
-$lname = strip_tags($_POST['sn']);
-$email = strip_tags($_POST['e']);
-try
+if(isset($_POST['sign_up']))
 {
-	if (!empty($usrname) && !empty($passwd) && !empty($passwd2) && !empty($email) && !empty($fname) && !empty($lname))
+	$usrname = strip_tags($_POST['u']);
+	$passwd = md5($_POST['p1']);
+	$passwd2 = trim($_POST['p2']);
+	$fname = strip_tags($_POST['fn']);
+	$lname = strip_tags($_POST['sn']);
+	$email = strip_tags($_POST['e']);
+	try
 	{
-
-		if(isset($usrname) && isset($passwd) && isset($passwd2) && isset($email) && isset($fname) && isset($lname))
+		if (!empty($usrname) && !empty($passwd) && !empty($passwd2) && !empty($email) && !empty($fname) && !empty($lname))
 		{
-			$dsn = "mysql:host=$server;dbname=$db";
-			$connect = new PDO($dsn, $user, $password);
-			$mys= $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email_address");
-			$stmt = $connect->prepare($mys);
-			$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'pass_word' => $passwd, 'email_address' => $email]);
-			$usr = $stmt->fetch();
+
+			if(isset($usrname) && isset($passwd) && isset($passwd2) && isset($email) && isset($fname) && isset($lname))
 			{
-				if($usr[1] != $usrname && $usr[5] != $email)
+				$dsn = "mysql:host=$server;dbname=$db";
+				$connect = new PDO($dsn, $user, $password);
+				$mys= $connect->query("SELECT username, email_address FROM users WHERE username=:username OR email_address=:email_address");
+				$stmt = $connect->prepare($mys);
+				$stmt->execute(['username' => $usrname, 'firstname' => $fname, 'lastname' => $lname, 'pass_word' => $passwd, 'email_address' => $email]);
+				$usr = $stmt->fetch();
 				{
-					
-					if(filter_var(trim($email), FILTER_VALIDATE_EMAIL))
+					if($usr[1] != $usrname && $usr[5] != $email)
 					{
-						$vkey = "123456789ABCDEFGHIJKLMNavkfirutbeifgnhgkwjhD";
-						$vkey = str_shuffle($vkey);
-						$vkey = substr($vkey,0,30);
-						$pass = $usrname . $email;
-						$phash = md5($pass);
-						$email_cont = "Registration for Camagru";
-						$head = "From noreply@camagruteam.co.za" . "\r\n";
-						$head .= 'MIME-Version: 1.0' . "\r\n";
-						$head .= 'Content-type:text/html;
-						charset=iso-8859-1' . "\r\n";
-						$content = "Welcome $fname $lname. <br> You have successfully signed up for Camagru. <br>
-						as a new member is simple to login. Just use $usrname and your username to login. <br>
-						The follwing email is to verify you as a member.Please click the link and follow to verify and
-						activate your account. <br>
-						Please check if this is you <br><br>
-						Username: $usrname <br><br>
-						If this is your chosen username please click the link below: <br>
-						<a href='http://localhost:8080/camagru/register.php?action=signup&email=$email&vk=$vkey'>Click me </a><br><br>
-						The Camagru team";
-
-						try 
+						
+						if(filter_var(trim($email), FILTER_VALIDATE_EMAIL))
 						{
-							$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address, vkey) VALUES (:username, :firstname, :lastname, :pass_word, :email_address, :vkey)");
-							$signup->bindParam(':username', $usrname);
-							$signup->bindParam(':firstname', $fname);
-							$signup->bindParam(':lastname', $lname);
-							$signup->bindParam(':pass_word', md5($passwd));
-							$signup->bindParam(':email_address', $email);
-							$signup->bindParam(':vkey', $vkey);
-							$signup->execute();
-						} catch (Exception $e) {
-							echo $e->getMessage();
-						}
-						if ($signup)
-						{
+							$vkey = "123456789ABCDEFGHIJKLMNavkfirutbeifgnhgkwjhD";
+							$vkey = str_shuffle($vkey);
+							$vkey = substr($vkey,0,30);
+							$pass = $usrname . $email;
+							$phash = md5($pass);
+							$email_cont = "Registration for Camagru";
+							$head = "From noreply@camagruteam.co.za" . "\r\n";
+							$head .= 'MIME-Version: 1.0' . "\r\n";
+							$head .= 'Content-type:text/html;
+							charset=iso-8859-1' . "\r\n";
+							$content = "Welcome $fname $lname. <br> You have successfully signed up for Camagru. <br>
+							as a new member is simple to login. Just use $usrname and your username to login. <br>
+							The follwing email is to verify you as a member.Please click the link and follow to verify and
+							activate your account. <br>
+							Please check if this is you <br><br>
+							Username: $usrname <br><br>
+							If this is your chosen username please click the link below: <br>
+							<a href='http://localhost:8080/camagru/register.php?action=signup&email=$email&vk=$vkey'>Click me </a><br><br>
+							The Camagru team";
 
-							if (mail($email, $email_cont, $content, $head))
+							try 
 							{
-								echo 'Verification email successfully received';
+								$signup = $connect->prepare("INSERT INTO users(username, firstname, lastname, pass_word , email_address, vkey) VALUES (:username, :firstname, :lastname, :pass_word, :email_address, :vkey)");
+								$signup->bindParam(':username', $usrname);
+								$signup->bindParam(':firstname', $fname);
+								$signup->bindParam(':lastname', $lname);
+								$signup->bindParam(':pass_word', $passwd);
+								$signup->bindParam(':email_address', $email);
+								$signup->bindParam(':vkey', $vkey);
+								$signup->execute();
+							} catch (Exception $e) {
+								echo $e->getMessage();
+							}
+							if ($signup)
+							{
+
+								if (mail($email, $email_cont, $content, $head))
+								{
+									echo 'Verification email successfully received';
+								}
+								else
+								{
+									echo 'There was an error, the email was not properly sent';
+								}
 							}
 							else
 							{
-								echo 'There was an error, the email was not properly sent';
+								echo 'There was an error saving user to the database';
 							}
 						}
-						else
-						{
-							echo 'There was an error saving user to the database';
-						}
+					else
+					{
+						echo 'please proceed';
 					}
+				}
 				else
 				{
-					echo 'please proceed';
+					echo 'Fill in all relevant fields';
 				}
-			}
-			else
-			{
-				echo 'Fill in all relevant fields';
 			}
 		}
 	}
+	}
+	catch(PDOException $e)
+	{
+		echo 'Registration unsucessfull. Try again!!';
+	}
 }
-}
-catch(PDOException $e)
-{
-	echo 'Registration unsucessfull. Try again!!';
-}
+?>

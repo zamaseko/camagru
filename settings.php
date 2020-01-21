@@ -1,7 +1,7 @@
 <?php 
 include "head.php";
-$use = $_SESSION['vkey']; 
-session_start();
+//$use = $_SESSION['vkey']; 
+//session_start();
 ?>
 
 <html>

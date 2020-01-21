@@ -1,10 +1,10 @@
 <?php
 
-session_start();
+//session_start();
 include "config/database.php";
 include "head.php";
 
-$use = $_SESSION['vkey'];
+//$use = $_SESSION['vkey'];
 try
 {
     if (isset($use))
@@ -20,7 +20,7 @@ try
         $counter = 0;
         while($counter < $hw_many)
         {
-            echo "<a href=gallery.php><img src=".$fetch_it[$counter][3]."></a>";
+            echo "<img src=".$fetch_it[$counter][3].">";
             $counter++;
        }
     }

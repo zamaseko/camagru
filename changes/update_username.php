@@ -1,8 +1,9 @@
 <?php
-
+session_start();
 include_once '../config/database.php';
 try
 {
+	$use = $_SESSION['vkey'];
     $em = $_GET['email'];
     $nus = $_GET['usr'];
     $dsn = "mysql:host=$server;dbname=$db";
@@ -10,7 +11,7 @@ try
     $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $connect->prepare("UPDATE users SET username =:username WHERE email_address =:email_address");
     $stmt->execute(['username' => $nus , 'email_address' => $em]);
-    if($usr[1] == $$nus)
+    if($use)//$usr[1] == $$nus)
     {
         echo 'Username has successfully been updated';
     }
