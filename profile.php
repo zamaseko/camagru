@@ -1,11 +1,12 @@
 <?php
 include "head.php";
 //session_start();
+ $use = $_SESSION['vkey'];
  if(!isset($_SESSION['vkey']))
 {
-	header('Location: index.php');
+	header("Location: index.php");
 }
- $use = $_SESSION['vkey'];
+
  ?>
 <html>
 <style>
@@ -65,18 +66,24 @@ a.buy:hover
             $dsn = "mysql:host=$server;dbname=$db";
             $connect = new PDO($dsn, $user, $password);
             $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $connect->prepare("SELECT u.vkey, u.username, m.o_vkey, m.media_path, m.media_id, m.caption, m.media_date FROM users u, media m WHERE u.vkey = m.o_vkey ORDER BY media_date DESC");
-            $stmt->execute();
-            if ($stmt === false)
+            //$stmt = $connect->prepare("SELECT u.vkey, u.username, m.o_vkey, m.media_path, m.media_id, m.caption, m.media_date FROM users u, media m WHERE u.vkey = m.o_vkey ORDER BY media_date DESC");
+            $stmt = $connect->prepare("SELECT * FROM media WHERE o_vkey = :o_vkey ORDER BY media_date DESC");
+            $stmt->execute(['o_vkey' => $use]);
+            $med = $stmt->fetchAll();
+            //var_dump($med);
+            if ($med=== false)
             {
                 echo 'No Posts Yet';
-            }else{
-                foreach ($stmt as $row) {
+            }
+            else
+            {
+                foreach ($med as $row) {
                     $image_id = $row['media_id'];
                     echo "<img src='".$row['media_path']."' width='250px' height='250px' class='image'></br>";                      
                     echo    "<div class='overlay'>";
                     echo        "<div class='caption_text'>".$row['caption']."</div>";
                     echo        "<button><a class='btn profile_buttons blue' style='width: 100%' href='delete.php?remove=delete&id=$row[media_id]'>Delete</a></button><br>";
+                    echo    "<button><a class='btn profile_buttons blue' style='width: 100%' href='comment.php?remove=comment&id=$row[media_id]'>Comment</a></button><br>";
                     echo    "</div>";
                     echo "</div>";
                     
